@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="extension-sankhya">
+    <output-path>$PROJECT_DIR$/out/artifacts/extension_sankhya</output-path>
+    <root id="archive" name="extension-sankhya.jar">
+      <element id="module-output" name="servico-integracao-target" />
+      <element id="library" level="project" name="http-20070405" />
+    </root>
+  </artifact>
+</component>

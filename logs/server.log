@@ -1,0 +1,8 @@
+jan 29, 2021 5:05:43 PM br.com.sankhyamt.integracaotarget.util.LogFile createLog
+INFORMAÇÕES: Arquivo de log criado.
+jan 29, 2021 5:05:43 PM br.com.sankhyamt.integracaotarget.Main main
+INFORMAÇÕES: Iniciando serviço de integração...
+jan 29, 2021 5:05:45 PM br.com.sankhyamt.integracaotarget.model.database.ConnectionSQLServer checkConnectionDB
+INFORMAÇÕES: Conectado com o banco de dados
+jan 29, 2021 5:05:45 PM br.com.sankhyamt.integracaotarget.Main main
+INFORMAÇÕES: Servidor inciado na porta 9091
