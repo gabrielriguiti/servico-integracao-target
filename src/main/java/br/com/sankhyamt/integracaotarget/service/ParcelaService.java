@@ -63,7 +63,7 @@ public class ParcelaService {
 
         } catch (SQLException e) {
 
-            LogFile.logger.info("Erro ao buscar parcelas do afretamento: " + e.getMessage());
+            LogFile.logger.info("Erro ao buscar as parcelas do afretamento: " + e.getMessage());
 
             throw new DatabaseException(e.getMessage());
         }
