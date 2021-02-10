@@ -6,7 +6,7 @@ import br.com.sankhyamt.integracaotarget.util.LogFile;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         LogFile.createLog();
         LogFile.logger.info("Iniciando serviço de integração...");
@@ -14,6 +14,6 @@ public class Main {
         ConnectionSQLServer.checkConnectionDB();
         StartServer.startServer();
 
-        LogFile.logger.info("Servidor inciado na porta " + StartServer.porta);
+        LogFile.logger.info("Servidor iniciado na porta " + StartServer.porta);
     }
 }

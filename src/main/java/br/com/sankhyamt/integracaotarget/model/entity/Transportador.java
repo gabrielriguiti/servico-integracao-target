@@ -60,6 +60,7 @@ public class Transportador {
     private String RGContato = "";
     private String orgaoEmissoContato = "";
     private String PisPasep = "";
+    private String complementoEndereco = "";
 
     /**
      * @param endereco       Recebe a rua do endereço.
@@ -465,6 +466,14 @@ public class Transportador {
 
     public void setPisPasep(String pisPasep) {
         PisPasep = pisPasep;
+    }
+
+    public String getComplementoEndereco() {
+        return complementoEndereco;
+    }
+
+    public void setComplementoEndereco(String complementoEndereco) {
+        this.complementoEndereco = complementoEndereco;
     }
 
     @Override

@@ -1,10 +1,13 @@
 package br.com.sankhyamt.integracaotarget.api;
 
+import br.com.sankhyamt.integracaotarget.exception.IntegracaoException;
 import br.com.sankhyamt.integracaotarget.model.entity.Viagem;
 import br.com.sankhyamt.integracaotarget.service.CiotService;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
+import br.com.sankhyamt.integracaotarget.util.LogSankhya;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -43,22 +46,30 @@ public class CiotResource implements HttpHandler {
             json.append((char) i);
         }
 
-        JsonObject jsonObject = new JsonParser().parse(json.toString()).getAsJsonObject();
-        JsonObject response = new JsonObject();
+        try {
+            JsonObject jsonObject = new JsonParser().parse(json.toString()).getAsJsonObject();
+            JsonObject response = new JsonObject();
 
-        Viagem afretamento = new Viagem();
-        afretamento.setCodAfretamento(getCodAfretamento(jsonObject));
-        afretamento.setCodEmp(getCodEmpresa(jsonObject));
-        afretamento.setOrdemCarga(getOrdemCarga(jsonObject));
+            Viagem afretamento = new Viagem();
+            afretamento.setCodAfretamento(getCodAfretamento(jsonObject));
+            afretamento.setCodEmp(getCodEmpresa(jsonObject));
+            afretamento.setOrdemCarga(getOrdemCarga(jsonObject));
 
-        String nroCiot = ciotService.ciotCenario3(afretamento);
+            String[] dadosCiot = ciotService.ciotCenario3(afretamento);
 
-        response.addProperty("nroCiot",nroCiot);
+            response.addProperty("nroCiot", dadosCiot[0]);
+            response.addProperty("idOperacaoTransporte", dadosCiot[1]);
 
-        exchange.sendResponseHeaders(200,response.toString().length());
+            exchange.sendResponseHeaders(200,response.toString().length());
 
-        responseBody.write(response.toString().getBytes());
-        responseBody.close();
+            responseBody.write(response.toString().getBytes());
+            responseBody.close();
+        } catch (JsonSyntaxException | IOException e) {
+
+            LogFile.logger.info("Erro na integração ".concat(e.getMessage()));
+
+            throw new IntegracaoException(e.getMessage());
+        }
     }
 
     public String getOrdemCarga(JsonObject JSON){

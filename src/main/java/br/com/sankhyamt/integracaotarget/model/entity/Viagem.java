@@ -44,4 +44,14 @@ public class Viagem {
     public void setCodAfretamento(String codAfretamento) {
         this.codAfretamento = codAfretamento;
     }
+
+    @Override
+    public String toString() {
+        return "Viagem{" +
+                "proprietarioANTT='" + proprietarioANTT + '\'' +
+                ", ordemCarga='" + ordemCarga + '\'' +
+                ", codEmp='" + codEmp + '\'' +
+                ", codAfretamento='" + codAfretamento + '\'' +
+                '}';
+    }
 }

@@ -38,6 +38,7 @@ public class Motorista {
     private String variacaoContaPoupanca = "0";
     private Boolean ativo = true;
     private String codigoIBGEMunicipio = "0";
+    private String RNTRC = "0";
 
     /**
      * @return Retorna o endereço completo do parceiro transportador.
@@ -288,6 +289,14 @@ public class Motorista {
 
     public void setCodigoIBGEMunicipio(String codigoIBGEMunicipio) {
         this.codigoIBGEMunicipio = codigoIBGEMunicipio;
+    }
+
+    public String getRNTRC() {
+        return RNTRC;
+    }
+
+    public void setRNTRC(String RNTRC) {
+        this.RNTRC = RNTRC;
     }
 
     @Override

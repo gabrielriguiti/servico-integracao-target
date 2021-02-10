@@ -12,7 +12,7 @@ public class OperacaoTransporte {
     private String NCM = "2302";
     private Integer proprietarioCarga = 0;
     private Double pesoCarga = 0.0;
-    private String tipoOperacao = "0";
+    private String tipoOperacao = "1";
     private Integer municipioOrigemCodigoIBGE = 0;
     private Integer municipioDestinoCodigoIBGE = 0;
     private String dataHoraInicio = "";
@@ -33,7 +33,7 @@ public class OperacaoTransporte {
     private String CPFMotorista = "";
     private String RNTRCMotorista = "";
     private String itemFinanceiro = "";
-    private Integer idRotaModelo = 0;
+    private Integer idRotaModelo = 14512;
     private Boolean deduzirImpostos = false;
     private Double tarifasBancarias = 0.0;
     private Integer quantidadeTarifasBancarias = 0;
@@ -447,5 +447,60 @@ public class OperacaoTransporte {
 
     public void setCNPJPagamentoOutraIPEF(String CNPJPagamentoOutraIPEF) {
         this.CNPJPagamentoOutraIPEF = CNPJPagamentoOutraIPEF;
+    }
+
+    @Override
+    public String toString() {
+        return "OperacaoTransporte{" +
+                "idOperacaoTransporte=" + idOperacaoTransporte +
+                ", codCentroDeCusto='" + codCentroDeCusto + '\'' +
+                ", NCM='" + NCM + '\'' +
+                ", proprietarioCarga=" + proprietarioCarga +
+                ", pesoCarga=" + pesoCarga +
+                ", tipoOperacao='" + tipoOperacao + '\'' +
+                ", municipioOrigemCodigoIBGE=" + municipioOrigemCodigoIBGE +
+                ", municipioDestinoCodigoIBGE=" + municipioDestinoCodigoIBGE +
+                ", dataHoraInicio='" + dataHoraInicio + '\'' +
+                ", dataHoraTermino='" + dataHoraTermino + '\'' +
+                ", CNPJCPFContratado='" + CNPJCPFContratado + '\'' +
+                ", valorFrete=" + valorFrete +
+                ", valorCombustivel=" + valorCombustivel +
+                ", valorPedagio=" + valorPedagio +
+                ", valorDespesas=" + valorDespesas +
+                ", valorImpostoSestSenat=" + valorImpostoSestSenat +
+                ", valorImpostoIRRF=" + valorImpostoIRRF +
+                ", valorImpostoINSS=" + valorImpostoINSS +
+                ", valorImpostoICMSISSQN=" + valorImpostoICMSISSQN +
+                ", parcelaUnica=" + parcelaUnica +
+                ", modoCompraValePedagio=" + modoCompraValePedagio +
+                ", categoriaVeiculo=" + categoriaVeiculo +
+                ", nomeMotorista='" + nomeMotorista + '\'' +
+                ", CPFMotorista='" + CPFMotorista + '\'' +
+                ", RNTRCMotorista='" + RNTRCMotorista + '\'' +
+                ", itemFinanceiro='" + itemFinanceiro + '\'' +
+                ", idRotaModelo=" + idRotaModelo +
+                ", deduzirImpostos=" + deduzirImpostos +
+                ", tarifasBancarias=" + tarifasBancarias +
+                ", quantidadeTarifasBancarias=" + quantidadeTarifasBancarias +
+                ", idIntegrador='" + idIntegrador + '\'' +
+                ", valorDescontoAntecipado=" + valorDescontoAntecipado +
+                ", CPFCNPJParticipanteDestinatario='" + CPFCNPJParticipanteDestinatario + '\'' +
+                ", CPFCNPJParticipanteContratante='" + CPFCNPJParticipanteContratante + '\'' +
+                ", CPFCNPJParticipanteSubcontratante='" + CPFCNPJParticipanteSubcontratante + '\'' +
+                ", CPFCNPJParticipanteConsignatario='" + CPFCNPJParticipanteConsignatario + '\'' +
+                ", numeroLacreTranporteCombustivel='" + numeroLacreTranporteCombustivel + '\'' +
+                ", numeroCartaoValePedagio='" + numeroCartaoValePedagio + '\'' +
+                ", quitacao=" + quitacao +
+                ", documentoValePedagio='" + documentoValePedagio + '\'' +
+                ", vlrImpostoISS=" + vlrImpostoISS +
+                ", tipoFormaPagamento=" + tipoFormaPagamento +
+                ", CEPOrigem='" + CEPOrigem + '\'' +
+                ", CEPDestino='" + CEPDestino + '\'' +
+                ", tipoCargaANTT=" + tipoCargaANTT +
+                ", distanciaPercorrida=" + distanciaPercorrida +
+                ", altoDesempenho=" + altoDesempenho +
+                ", destinacaoComercial=" + destinacaoComercial +
+                ", CNPJPagamentoOutraIPEF='" + CNPJPagamentoOutraIPEF + '\'' +
+                '}';
     }
 }

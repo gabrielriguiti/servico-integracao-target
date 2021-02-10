@@ -5,6 +5,8 @@ import br.com.sankhyamt.integracaotarget.exception.IntegracaoException;
 import br.com.sankhyamt.integracaotarget.model.database.ConnectionSQLServer;
 import br.com.sankhyamt.integracaotarget.model.entity.Participante;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
+import br.com.sankhyamt.integracaotarget.util.LogFile;
+import br.com.sankhyamt.integracaotarget.util.LogSankhya;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -64,11 +66,17 @@ public class ParticipanteService {
         } catch (SQLException e) {
 
             throw new DatabaseException("Erro ao buscar dados do participante\n\n".concat(e.getMessage()));
+
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+
+            LogFile.logger.info("Erro ao buscar as parcelas do afretamento: " + e.getMessage());
         }
+
+        return null;
     }
 
 
-    public Integer cadastrarAtualizarParticipante(Participante participante){
+    public Integer cadastrarAtualizarParticipante(Participante participante) throws SQLException {
 
         final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
 
@@ -105,7 +113,7 @@ public class ParticipanteService {
                 "      </tms:CadastrarAtualizarParticipante>\n" +
                 "   </soapenv:Body>\n" +
                 "</soapenv:Envelope>";
-
+        
         try {
 
             SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -140,8 +148,17 @@ public class ParticipanteService {
         if (!element.getElementsByTagName("Erro")
                 .item(0).getTextContent().equals("")){
 
+            LogSankhya.inserirLog(
+                    element.getElementsByTagName("MensagemErro")
+                            .item(0).getTextContent(),
+                    element.getElementsByTagName("Erro")
+                            .item(0).getTextContent(),
+                    request
+            );
+
             throw new IntegracaoException("Erro na integração\n\n" + element.getElementsByTagName("MensagemErro")
                     .item(0).getTextContent());
+
 
         } else if (!element.getElementsByTagName("IdParticipante").item(0).getTextContent().equals("")){
 

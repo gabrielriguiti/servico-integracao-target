@@ -27,7 +27,7 @@ public class ParcelaService {
         Connection connection = null;
 
         String sql = "SELECT * FROM VWPARCELASAFT \n" +
-                "WHERE ORDEMCARGA = ? AND CODAFT = ? AND CODEMP = ?";
+                "WHERE ORDEMCARGA = ? AND CODAFT = ? AND CODEMP = ? AND CODTIPCOB IN (2,3)";
 
         try{
             connection = ConnectionSQLServer.connection();
@@ -46,13 +46,13 @@ public class ParcelaService {
                         "                  <tms:Valor>" + resultQuery.getDouble("VALOR") + "</tms:Valor>\n" +
                         "                  <tms:NumeroParcela>" + resultQuery.getInt("NROPARCELA") + "</tms:NumeroParcela>\n" +
                         "                  <tms:DataVencimento>" + resultQuery.getString("DTVENC").trim() + "</tms:DataVencimento>\n" +
-                        "                  <tms:TipoDaParcela>" + resultQuery.getInt("TIPPARCELA") + "</tms:TipoDaParcela>\n" +
-                        "                  <tms:FormaPagamento>" + resultQuery.getInt("FORMAPGTO") + "</tms:FormaPagamento>\n" +
+                        "                  <tms:TipoDaParcela>" + resultQuery.getString("TIPPARCELA") + "</tms:TipoDaParcela>\n" +
+                        "                  <tms:FormaPagamento>" + resultQuery.getString("FORMAPGTO") + "</tms:FormaPagamento>\n" +
                         "                  <tms:CartaoPagamento></tms:CartaoPagamento>\n" +
-                        "                  <tms:CodigoBanco>" + resultQuery.getInt("CODBCO") + "</tms:CodigoBanco>\n" +
-                        "                  <tms:AgenciaDeposito>" + resultQuery.getInt("CODAG") + "</tms:AgenciaDeposito>\n" +
-                        "                  <tms:ContaDeposito>" + resultQuery.getInt("NUMCTA") + "</tms:ContaDeposito>\n" +
-                        "                  <tms:DigitoContaDeposito></tms:DigitoContaDeposito>\n" +
+                        "                  <tms:CodigoBanco>" + resultQuery.getString("CODBCO") + "</tms:CodigoBanco>\n" +
+                        "                  <tms:AgenciaDeposito>" + resultQuery.getString("CODAG") + "</tms:AgenciaDeposito>\n" +
+                        "                  <tms:ContaDeposito>" + resultQuery.getString("NUMCTA") + "</tms:ContaDeposito>\n" +
+                        "                  <tms:DigitoContaDeposito>0</tms:DigitoContaDeposito>\n" +
                         "                  <tms:ProcessarAutomaticamente>true</tms:ProcessarAutomaticamente>\n" +
                         "                  <tms:IdOperacaoTransporteParcela>0</tms:IdOperacaoTransporteParcela>\n" +
                         "                  <tms:FlagContaPoupanca>" + (resultQuery.getString("CTAPOUP").trim().equals("S")) + "</tms:FlagContaPoupanca>\n" +
@@ -66,6 +66,10 @@ public class ParcelaService {
             LogFile.logger.info("Erro ao buscar as parcelas do afretamento: " + e.getMessage());
 
             throw new DatabaseException(e.getMessage());
+
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+
+            LogFile.logger.info("Erro ao buscar as parcelas do afretamento: " + e.getMessage());
         }
 
         return parcelasRequest.toString();

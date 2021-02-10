@@ -4,6 +4,8 @@
     <root id="archive" name="extension-sankhya.jar">
       <element id="module-output" name="servico-integracao-target" />
       <element id="library" level="project" name="http-20070405" />
+      <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
+      <element id="library" level="project" name="SankhyaW-extensions" />
     </root>
   </artifact>
 </component>

@@ -15,10 +15,12 @@ public class ConnectionSQLServer {
     /**
      * @return Retorna uma conexão aberta com o banco de dados.
      */
-    public static Connection connection() {
+    public static Connection connection() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
-        String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=SETRANS_DEV;" +
-                "user=sankhya;password=tecsis";
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+
+        String connectionUrl = "jdbc:sqlserver://10.40.3.241:1433;databaseName=SETRANSPORTES_TST;" +
+                "user=SANKHYA;password=2oie7tn6";
 
         try {
             Connection connection = DriverManager.getConnection(connectionUrl);
@@ -49,6 +51,11 @@ public class ConnectionSQLServer {
             LogFile.logger.info("Erro ao conectar com o banco de dados. Mensagem do erro: " + e.getMessage());
 
             throw new DatabaseException(e.getMessage());
+
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+
+            LogFile.logger.info("Erro ao conectar com o banco de dados. Mensagem do erro: " + e.getMessage());
+
         }
     }
 }

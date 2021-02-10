@@ -1,14 +1,17 @@
 package br.com.sankhyamt.integracaotarget.service;
 
 import br.com.sankhyamt.integracaotarget.exception.DatabaseException;
+import br.com.sankhyamt.integracaotarget.exception.IntegracaoException;
 import br.com.sankhyamt.integracaotarget.model.database.ConnectionSQLServer;
 import br.com.sankhyamt.integracaotarget.model.entity.Transportador;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
+import br.com.sankhyamt.integracaotarget.util.LogSankhya;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import sun.rmi.runtime.Log;
 
 import javax.xml.soap.*;
 import java.io.ByteArrayInputStream;
@@ -53,8 +56,8 @@ public class TransportadorService {
                 "            <tms:Instrucao>1</tms:Instrucao>\n" +
                 "            <tms:RNTRC>" + transportador.getRNTRC() + "</tms:RNTRC>\n" +
                 "            <tms:CPFCNPJ>" + transportador.getCPFCNPJ() + "</tms:CPFCNPJ>\n" +
-                "            <tms:Nome>" + transportador.getNome() + "</tms:Nome>\n" +
-                "            <tms:Sobrenome>" + transportador.getSobrenome() + "</tms:Sobrenome>\n" +
+                "            <tms:Nome>" + transportador.getNome().substring(0,transportador.getNome().indexOf(" ")).trim() + "</tms:Nome>\n" +
+                "            <tms:Sobrenome>" + transportador.getNome().substring(transportador.getNome().indexOf(" "),20).trim() + "</tms:Sobrenome>\n" +
                 "            <tms:RazaoSocial>" + transportador.getRazaoSocial() + "</tms:RazaoSocial>\n" +
                 "            <tms:DataNascimento>" + transportador.getDataNascimento() + "</tms:DataNascimento>\n" +
                 "            <tms:RG>" + transportador.getRG() + "</tms:RG>\n" +
@@ -72,7 +75,7 @@ public class TransportadorService {
                 "            <tms:IdDmAtividadeEconomica>" + transportador.getIdDmAtividadeEconomica() + "</tms:IdDmAtividadeEconomica>\n" +
                 "            <tms:Endereco>" + transportador.getEndereco() + "</tms:Endereco>\n" +
                 "            <tms:NumeroEndereco>" + transportador.getNumeroEndereco() + "</tms:NumeroEndereco>\n" +
-                "            <tms:EnderecoComplemento>" + transportador.enderecoCompleto(transportador.getEndereco(), transportador.getNumeroEndereco(), transportador.getBairro()) + "</tms:EnderecoComplemento>\n" +
+                "            <tms:EnderecoComplemento>" + transportador.getComplementoEndereco() + "</tms:EnderecoComplemento>\n" +
                 "            <tms:Bairro>" + transportador.getBairro() + "</tms:Bairro>\n" +
                 "            <tms:CEP>" + transportador.getCEP() + "</tms:CEP>\n" +
                 "            <tms:CodigoIBGEMunicipio>" + transportador.getCodIbgeMunicipio() + "</tms:CodigoIBGEMunicipio>\n" +
@@ -133,15 +136,24 @@ public class TransportadorService {
             if (!element.getElementsByTagName("Erro")
                     .item(0).getTextContent().equals("")) {
 
-                throw new DatabaseException("ERRO NA INTEGRACAO\nMESSAGEM RETORNADA:" + element.getElementsByTagName("MensagemErro")
-                        .item(0).getTextContent());
+                LogFile.logger.info("Erro ao buscar os dados do transportador: ".concat(element.getElementsByTagName("MensagemErro")
+                        .item(0).getTextContent()));
+
+                LogSankhya.inserirLog(
+                        element.getElementsByTagName("MensagemErro")
+                                .item(0).getTextContent(),
+                        element.getElementsByTagName("Erro")
+                                .item(0).getTextContent(),
+                        request
+                );
+
             }
 
             idTranportador = Integer.valueOf(element.getElementsByTagName("IdCliente").item(0).getTextContent());
 
             return idTranportador;
 
-        } catch (SOAPException | IOException e) {
+        } catch (SOAPException | IOException | SQLException e) {
 
             throw new DatabaseException(e.getMessage());
 
@@ -191,11 +203,12 @@ public class TransportadorService {
                 dadosTransportador.setNumeroEndereco(rs.getInt("NUMEND"));
                 dadosTransportador.setCEP(rs.getString("CEP").trim());
                 dadosTransportador.setIndentificadorEndereco(rs.getString("COMPLEMENTO").trim());
-                dadosTransportador.setTelefoneFixo(rs.getString("TELEFONE").trim());
-                dadosTransportador.setTelefoneCelular(rs.getString("TIMTELEFONE01").trim());
+                dadosTransportador.setTelefoneFixo(rs.getString("TELEFONE").replace(" ","").trim());
+                dadosTransportador.setTelefoneCelular(rs.getString("TIMTELEFONE01").replace(" ","").trim());
                 dadosTransportador.setEstadoCivil(rs.getString("TIMESTADOCIVIL").trim());
                 dadosTransportador.setEmail(rs.getString("EMAIL").trim());
                 dadosTransportador.setUsuario(rs.getString("USUARIO").trim());
+                dadosTransportador.setComplementoEndereco(rs.getString("COMPLEMENTO").trim());
                 dadosTransportador.setCNH(rs.getString("NROCNH").trim());
                 dadosTransportador.setTipoCNH(rs.getString("CATEGORIACNH").trim());
                 dadosTransportador.setDataValidadeCNH(rs.getString("VENCIMENTOCNH").trim());

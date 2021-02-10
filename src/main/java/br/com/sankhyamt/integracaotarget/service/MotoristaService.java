@@ -6,6 +6,8 @@ import br.com.sankhyamt.integracaotarget.model.database.ConnectionSQLServer;
 import br.com.sankhyamt.integracaotarget.model.entity.Motorista;
 import br.com.sankhyamt.integracaotarget.model.entity.Transportador;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
+import br.com.sankhyamt.integracaotarget.util.LogFile;
+import br.com.sankhyamt.integracaotarget.util.LogSankhya;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -72,13 +74,20 @@ public class MotoristaService {
                 dadosMotorista.setCodAgencia(rs.getString("AGENCIAADIANT").trim());
                 dadosMotorista.setDigitoAgencia(rs.getString("DIGITOADIANT").trim());
                 dadosMotorista.setContaCorrente(rs.getString("CONTAADIANT").trim());
+                dadosMotorista.setRNTRC(rs.getString("RNTRC").trim());
             }
 
             return dadosMotorista;
 
         } catch (SQLException e) {
+
             throw new DatabaseException("Erro ao buscar dados do motorista\n\n" + e.getMessage());
+
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+            LogFile.logger.info("Erro ao buscar as parcelas do afretamento: " + e.getMessage());
         }
+
+        return null;
     }
 
     /**
@@ -169,6 +178,14 @@ public class MotoristaService {
             if (element.getElementsByTagName("Erro")
                     .item(0).getTextContent().contains("Tipo de Erro")){
 
+                LogSankhya.inserirLog(
+                        element.getElementsByTagName("MensagemErro")
+                                .item(0).getTextContent(),
+                        element.getElementsByTagName("Erro")
+                                .item(0).getTextContent(),
+                        request
+                );
+
                 throw new IntegracaoException("Erro na integração\n\n" + element.getElementsByTagName("Erro")
                         .item(0).getTextContent());
 
@@ -179,7 +196,7 @@ public class MotoristaService {
                 return idMotorista;
             }
 
-        } catch (SOAPException | IOException e) {
+        } catch (SOAPException | IOException | SQLException e) {
 
             throw new IntegracaoException("Erro na integração\n\n" + e.getMessage());
         }
