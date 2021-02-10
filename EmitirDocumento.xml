@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tms="http://tmsfrete.v2.targetmp.com.br">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <tms:EmitirDocumento>
+            <tms:auth>
+                <tms:Usuario>tms.sankhya2</tms:Usuario>
+                <tms:Senha>123@Mudar</tms:Senha>
+                <tms:Token></tms:Token>
+            </tms:auth>
+            <tms:emissaoDocumento>
+                <tms:Tipo>1</tms:Tipo>
+                <tms:IdEntidade>9703</tms:IdEntidade>
+            </tms:emissaoDocumento>
+        </tms:EmitirDocumento>
+    </soapenv:Body>
+</soapenv:Envelope>
