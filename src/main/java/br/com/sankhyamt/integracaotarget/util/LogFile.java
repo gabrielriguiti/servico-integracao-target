@@ -7,10 +7,17 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * @since v1.0
+ * @version 1.1
+ */
 public class LogFile {
 
     public static Logger logger;
 
+    /**
+     * Cria o arquivo de log.
+     */
     public static void createLog(){
 
         logger = Logger.getLogger("logTotal");

@@ -11,7 +11,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import sun.rmi.runtime.Log;
 
 import javax.xml.soap.*;
 import java.io.ByteArrayInputStream;
@@ -95,6 +94,15 @@ public class OperacaoTransporteService {
         return operacaoTransporte;
     }
 
+    /**
+     * Cadastra/Atualiza a operação de Transporte.
+     * @param operacaoTransporte Recebe uma instância de OperacaoTransporte com os dados da operação.
+     * @param transportador Recebe uma instância de Transporte com os dados do operador.
+     * @param motorista Recebe uma instância de Motorista com os dados do motorista.
+     * @param participante Recebe uma instância de Participante com os dados do participante.
+     * @param viagem Recebe uma instância de Viagem com os dados da viagem.
+     * @return Retorna o ID da Operação de Transporte
+     */
     public static Integer cadastrarAtualizarOperacaoTransporte(
             OperacaoTransporte operacaoTransporte, Transportador transportador,
             Motorista motorista, Participante participante, Viagem viagem) {
@@ -229,6 +237,11 @@ public class OperacaoTransporteService {
         }
     }
 
+    /**
+     * Declara a operação de Transporte
+     * @param operacaoTransporte
+     * @return Retorna o número do CIOT.
+     */
     public static Long declararOperacaoTranporte(OperacaoTransporte operacaoTransporte) {
 
         Long nroCIOT = 0l;

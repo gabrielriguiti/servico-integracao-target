@@ -1,12 +1,9 @@
 package br.com.sankhyamt.integracaotarget.api;
 
 import br.com.sankhyamt.integracaotarget.exception.IntegracaoException;
-import br.com.sankhyamt.integracaotarget.model.entity.OperacaoTransporte;
 import br.com.sankhyamt.integracaotarget.model.entity.Viagem;
 import br.com.sankhyamt.integracaotarget.service.CiotService;
-import br.com.sankhyamt.integracaotarget.service.OperacaoTransporteService;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
-import br.com.sankhyamt.integracaotarget.util.LogSankhya;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
@@ -19,7 +16,6 @@ import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Classe que receberá as requisições de emissão do CIOT.
@@ -117,6 +113,10 @@ public class CiotResource implements HttpHandler {
         }
     }
 
+    /**
+     * @param JSON Recebe o objeto JSON.
+     * @return Retorna a ordem de carga.
+     */
     public String getOrdemCarga(JsonObject JSON) {
 
         String ordemCarga = JSON.get("ordemCarga").toString();
@@ -124,6 +124,10 @@ public class CiotResource implements HttpHandler {
         return ordemCarga;
     }
 
+    /**
+     * @param JSON Recebe o objeto JSON.
+     * @return Retorna a empresa.
+     */
     public String getCodEmpresa(JsonObject JSON) {
 
         String codemp = JSON.get("codemp").toString();
@@ -131,6 +135,10 @@ public class CiotResource implements HttpHandler {
         return codemp;
     }
 
+    /**
+     * @param JSON Recebe o objeto JSON.
+     * @return Retorna o código do afretamento.
+     */
     public String getCodAfretamento(JsonObject JSON) {
 
         String codAfretamento = JSON.get("codaft").toString();
@@ -138,6 +146,10 @@ public class CiotResource implements HttpHandler {
         return codAfretamento;
     }
 
+    /**
+     * @param JSON Recebe o objeto JSON.
+     * @return Retorna a instrução da requisição.
+     */
     public String getInstrucao(JsonObject JSON) {
 
         String instrucao = JSON.get("instrucao").toString();
@@ -145,6 +157,10 @@ public class CiotResource implements HttpHandler {
         return instrucao;
     }
 
+    /**
+     * @param JSON Recebe o objeto JSON.
+     * @return Retorna o id da operação.
+     */
     public String getIdOperacao(JsonObject JSON) {
 
         String idOperacao = JSON.get("idOperacao").toString();
@@ -152,6 +168,10 @@ public class CiotResource implements HttpHandler {
         return idOperacao;
     }
 
+    /**
+     * @param JSON Recebe o objeto JSON.
+     * @return Retorna o motivo do cancelamento.
+     */
     public String getMotivo(JsonObject JSON) {
 
         String motivo = JSON.get("motivo").toString();

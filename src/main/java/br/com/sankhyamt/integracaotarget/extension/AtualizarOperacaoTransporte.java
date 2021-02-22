@@ -15,8 +15,17 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * @since v1.0
+ * @version 1.0
+ */
 public class AtualizarOperacaoTransporte implements AcaoRotinaJava {
 
+    /**
+     * Executa o botão de ação Atualizar Operação de Transporte.
+     * @param contextoAcao
+     * @throws Exception
+     */
     @Override
     public void doAction(ContextoAcao contextoAcao) throws Exception {
 

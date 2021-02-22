@@ -8,8 +8,19 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @since v1.0
+ * @version 1.1
+ */
 public class LogSankhya {
 
+    /**
+     * Insere log no SANKHYA.
+     * @param erroEsp Recebe a mensagem de erro detalhada.
+     * @param response Recebe a mensage de erro específica.
+     * @param request Recebe o XML da requisição.
+     * @throws SQLException
+     */
     public static void inserirLog(String erroEsp, String response,
                                   String request) throws SQLException {
 

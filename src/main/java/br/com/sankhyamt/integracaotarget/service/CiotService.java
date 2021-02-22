@@ -16,6 +16,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * @since v1.0
+ * @version 1.0
+ */
 public class CiotService {
 
     static TransportadorService transportadorService = new TransportadorService();
@@ -23,6 +27,13 @@ public class CiotService {
     static ParticipanteService participanteService = new ParticipanteService();
     static AuthProperties authProperties = new AuthProperties();
 
+    /**
+     * Efetua o cadastro da operação e declara o documento CIOT.
+     * @param viagem Recebe uma instância de Viagem com os dados da viagem.
+     * @return Retorna um Array de tipo String, de duas posições com os
+     * dados do CIOT.
+     * @throws SQLException
+     */
     public String[] ciotCenario3(Viagem viagem) throws SQLException {
 
         String[] dadosCiot = new String[2];
@@ -90,6 +101,11 @@ public class CiotService {
         return null;
     }
 
+    /**
+     * Emite o documento CIOT graficamente.
+     * @param idOperacaoTransporte Recebe o ID da Operação de Transporte.
+     * @return Retorna o documento binário.
+     */
     public static String emitirCiot(String idOperacaoTransporte) {
 
         final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
@@ -166,6 +182,12 @@ public class CiotService {
 
     }
 
+    /**
+     * Cancela a operação de transporte.
+     * @param idOperacao Recebe o ID da Operação de Transporte.
+     * @param motivoCancelamento Recebe o Motivo do Cancelamento da Operação.
+     * @return Retorna o ID do Cancelamento.
+     */
     public static String cancelarOperacaoTransporte(String idOperacao, String motivoCancelamento) {
 
         String idCancelamento = "0";
@@ -248,6 +270,11 @@ public class CiotService {
         return "0";
     }
 
+    /**
+     * Encerra a operação de Transporte.
+     * @param idOperacao Recebe o ID da Operação de Transporte.
+     * @return Retorna o ID do Encerramento da Operação.
+     */
     public static String encerrarOperacaoTransporte(String idOperacao) {
 
         String idEncerramento = "0";

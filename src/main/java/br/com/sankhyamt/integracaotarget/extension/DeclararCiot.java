@@ -17,12 +17,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Classe para botão de ação no SANKHYA.
- *
+ * @version 1.0
  * @since v1.0
  */
 public class DeclararCiot implements AcaoRotinaJava {
 
+    /**
+     * Executa o botão de ação Declarar Documento CIOT.
+     * @param contextoAcao
+     * @throws Exception
+     */
     @Override
     public void doAction(ContextoAcao contextoAcao) throws Exception {
 

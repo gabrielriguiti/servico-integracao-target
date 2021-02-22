@@ -4,8 +4,17 @@ import br.com.sankhyamt.integracaotarget.model.database.ConnectionSQLServer;
 import br.com.sankhyamt.integracaotarget.server.StartServer;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
 
+/**
+ * @since v1.0
+ * @version 1.0
+ */
 public class Main {
 
+    /**
+     * Método principal
+     * @param args Argumentos da aplicação
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
 
         LogFile.createLog();

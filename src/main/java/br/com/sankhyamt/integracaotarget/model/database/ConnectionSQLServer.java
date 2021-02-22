@@ -35,6 +35,9 @@ public class ConnectionSQLServer {
         return null;
     }
 
+    /**
+     * Testa a conexão com o banco de dados.
+     */
     public static void checkConnectionDB(){
 
         try {

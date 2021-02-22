@@ -75,7 +75,12 @@ public class ParticipanteService {
         return null;
     }
 
-
+    /**
+     * Cadastra/Atualiza participante da viagem.
+     * @param participante Recebe uma instância de Participante com os dados do participante.
+     * @return Retorna o ID do Participante.
+     * @throws SQLException
+     */
     public Integer cadastrarAtualizarParticipante(Participante participante) throws SQLException {
 
         final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";

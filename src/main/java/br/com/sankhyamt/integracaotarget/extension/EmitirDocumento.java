@@ -14,8 +14,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 
+/**
+ * @since v1.0
+ * @version 1.0
+ */
 public class EmitirDocumento implements AcaoRotinaJava {
 
+    /**
+     * Executa o botão de ação Emitir Documento.
+     * @param contextoAcao
+     * @throws Exception
+     */
     @Override
     public void doAction(ContextoAcao contextoAcao) throws Exception {
 
