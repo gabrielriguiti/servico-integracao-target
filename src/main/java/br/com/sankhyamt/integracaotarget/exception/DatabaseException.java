@@ -2,8 +2,8 @@ package br.com.sankhyamt.integracaotarget.exception;
 
 public class DatabaseException extends RuntimeException {
 
-    public DatabaseException(String msg) {
+    public DatabaseException(String erro) {
 
-        super(msg);
+        super(erro);
     }
 }
