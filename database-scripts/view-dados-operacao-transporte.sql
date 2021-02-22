@@ -7,7 +7,7 @@ SELECT CASE
        (SELECT SUM(PESOTOTAL) FROM VMSCTE WHERE ORDEMCARGA = ORD.ORDEMCARGA AND CODEMP = ORD.CODEMP) AS PESOCARGA,
        ISNULL(ORIG.CODMUNFIS, 0)                                                                     AS CODIBGEORIG,
        ISNULL(DEST.CODMUNFIS, 0)                                                                     AS CODIBGEDEST,
-       ISNULL(FORMAT(GETDATE() + 1, 'yyyy-MM-dd'), '')                                               AS DTINIC,
+       ISNULL(FORMAT(ORD.DHSAIDA, 'yyyy-MM-dd') + 'T' + FORMAT(ORD.DHSAIDA, 'HH:mm:ss'), '')         AS DTINIC,
        ISNULL(FORMAT(ORD.DHPREVCGD, 'yyyy-MM-dd'), '')                                               AS DTFIM,
        ISNULL(AFT.VLRFRTACERT, 0)                                                                    AS VLRFRETE,
        ISNULL(ORD.VLRPEDAGIOTOT, 0)                                                                  AS VLRPEDAGIO,
@@ -17,11 +17,13 @@ SELECT CASE
        CASE
            WHEN ISNULL(AFT.VLRADIANT, 0) = 0 OR ISNULL(AFT.VLRSALDOFRETE, 0) = 0
                THEN 'S'
-           ELSE 'N' END                                                                              AS PARCELAUNICA,
+           ELSE 'N'
+           END                                                                                       AS PARCELAUNICA,
        CASE
            WHEN AFT.FORMAPGTOPEDAGIO = 'TG' THEN 1
            WHEN AFT.FORMAPGTOPEDAGIO = 'S' THEN 2
-           ELSE 4 END                                                                                AS FORMAPGTOPEDAGIO,
+           ELSE 4
+           END                                                                                       AS FORMAPGTOPEDAGIO,
        ISNULL(CMP.CODCATEGTARGET, 0)                                                                 AS CATEGVEIC,
        ISNULL(ORD.CODROTA, 0)                                                                        AS ROTA,
        ISNULL(PARANTT.TIPPESSOA, '')                                                                 AS TIPPESSOA,
@@ -35,7 +37,8 @@ SELECT CASE
                      WHERE CODPARC = ORD.CODPARCCOL)
            ELSE (SELECT CEP
                  FROM TGFPAR
-                 WHERE CODPARC = ORD.CODPARCREM) END                                                 AS CEPORIGEM,
+                 WHERE CODPARC = ORD.CODPARCREM)
+           END                                                                                       AS CEPORIGEM,
        CASE
            WHEN ORD.CODPARCENT IS NOT NULL
                THEN (SELECT CEP
@@ -43,15 +46,18 @@ SELECT CASE
                      WHERE CODPARC = ORD.CODPARCENT)
            ELSE (SELECT CEP
                  FROM TGFPAR
-                 WHERE CODPARC = ORD.CODPARCDEST) END                                                AS CEPDESTINO,
+                 WHERE CODPARC = ORD.CODPARCDEST)
+           END                                                                                       AS CEPDESTINO,
        ISNULL(ORD.AD_TIPCARGAANTT, 0)                                                                AS TIPCARGAANTT,
        ISNULL(AFT.VLRTAXASEGURO, 0)                                                                  AS VLRTAXASEGURO,
+       ROT.DISTANCIA                                                                                 AS DISTANCIA,
        ORD.ORDEMCARGA,
        ORD.CODEMP,
        AFT.CODAFT
 FROM TGFCAB CAB
          INNER JOIN TGFORD ORD ON ORD.ORDEMCARGA = CAB.ORDEMCARGA AND ORD.CODEMP = CAB.CODEMP
-         INNER JOIN VMSCTE CTE ON CTE.ORDEMCARGA = ORD.ORDEMCARGA AND CTE.CODEMP = ORD.CODEMP AND CTE.CODPARCDEST = CAB.CODPARCDEST
+         INNER JOIN VMSCTE CTE
+                    ON CTE.ORDEMCARGA = ORD.ORDEMCARGA AND CTE.CODEMP = ORD.CODEMP AND CTE.CODPARCDEST = CAB.CODPARCDEST
          INNER JOIN TGFROT ROT ON ROT.CODROTA = ORD.CODROTA
          INNER JOIN TSICID ORIG ON ORIG.CODCID = ROT.CODCIDORIG
          INNER JOIN TSICID DEST ON DEST.CODCID = ROT.CODCIDDEST

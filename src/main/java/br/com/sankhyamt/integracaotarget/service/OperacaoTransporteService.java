@@ -20,12 +20,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
 
 /**
  * Classe com os serviços da Operação de Transporte.
+ *
  * @since v1.0
  */
 public class OperacaoTransporteService {
@@ -34,10 +33,11 @@ public class OperacaoTransporteService {
 
     /**
      * Esse método busca os dados da Operação de Tranporte na base de dados SANKHYA.
+     *
      * @param viagem - Recebe um objeto Viagem
      * @return - Retorna um objeto OperacaoTransporte com os dados da operação.
      */
-    public static OperacaoTransporte buscarDadosOperacaoTranporte(Viagem viagem){
+    public static OperacaoTransporte buscarDadosOperacaoTranporte(Viagem viagem) {
 
         OperacaoTransporte operacaoTransporte = new OperacaoTransporte();
 
@@ -50,13 +50,13 @@ public class OperacaoTransporteService {
             connection = ConnectionSQLServer.connection();
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,viagem.getOrdemCarga());
-            statement.setString(2,viagem.getCodEmp());
-            statement.setString(3,viagem.getCodAfretamento());
+            statement.setString(1, viagem.getOrdemCarga());
+            statement.setString(2, viagem.getCodEmp());
+            statement.setString(3, viagem.getCodAfretamento());
 
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()){
+            if (resultSet.next()) {
 
                 operacaoTransporte.setProprietarioCarga(resultSet.getInt("PROPCARGA"));
                 operacaoTransporte.setPesoCarga(resultSet.getDouble("PESOCARGA"));
@@ -79,6 +79,7 @@ public class OperacaoTransporteService {
                 operacaoTransporte.setCEPOrigem(resultSet.getString("CEPORIGEM"));
                 operacaoTransporte.setCEPDestino(resultSet.getString("CEPDESTINO"));
                 operacaoTransporte.setTipoCargaANTT(resultSet.getInt("TIPCARGAANTT"));
+                operacaoTransporte.setDistanciaPercorrida(resultSet.getDouble("DISTANCIA"));
             }
 
         } catch (SQLException e) {
@@ -96,7 +97,7 @@ public class OperacaoTransporteService {
 
     public static Integer cadastrarAtualizarOperacaoTransporte(
             OperacaoTransporte operacaoTransporte, Transportador transportador,
-            Motorista motorista, Participante participante, Viagem viagem){
+            Motorista motorista, Participante participante, Viagem viagem) {
 
         Integer idOperacaoTransporte = 0;
 
@@ -119,7 +120,8 @@ public class OperacaoTransporteService {
                 "         </tms:auth>\n" +
                 "         <tms:operacao>\n" +
                 "            <tms:Instrucao>1</tms:Instrucao>\n" +
-                "            <tms:IdOperacaoTransporte i:nil = \"true\"/>\n" +
+                (operacaoTransporte.getIdOperacaoTransporte().equals(0) ? "            <tms:IdOperacaoTransporte i:nil=\"true\"/>" :
+                        "           <tms:IdOperacaoTransporte>" + operacaoTransporte.getIdOperacaoTransporte() + "</tms:IdOperacaoTransporte>") + "\n" +
                 "            <tms:CodigoCentroDeCusto>" + operacaoTransporte.getCodCentroDeCusto() + "</tms:CodigoCentroDeCusto>\n" +
                 "            <tms:NCM>" + operacaoTransporte.getNCM() + "</tms:NCM>\n" +
                 "            <tms:ProprietarioCarga>" + operacaoTransporte.getProprietarioCarga() + "</tms:ProprietarioCarga>\n" +
@@ -159,7 +161,7 @@ public class OperacaoTransporteService {
                 "            <tms:DeduzirImpostos>" + operacaoTransporte.getDeduzirImpostos() + "</tms:DeduzirImpostos>\n" +
                 "            <tms:TarifasBancarias>" + operacaoTransporte.getTarifasBancarias() + "</tms:TarifasBancarias>\n" +
                 "            <tms:QuantidadeTarifasBancarias>" + operacaoTransporte.getQuantidadeTarifasBancarias() + "</tms:QuantidadeTarifasBancarias>\n" +
-                "            <tms:IdIntegrador>"+ operacaoTransporte.getIdIntegrador() + " " + id.nextInt() +  "</tms:IdIntegrador>\n" +
+                "            <tms:IdIntegrador>" + operacaoTransporte.getIdIntegrador() + " " + id.nextInt() + "</tms:IdIntegrador>\n" +
                 "            <tms:ValorDescontoAntecipado>" + operacaoTransporte.getValorDescontoAntecipado() + "</tms:ValorDescontoAntecipado>\n" +
                 "            <tms:CPFCNPJParticipanteDestinatario>" + participante.getCPFCNPJ() + "</tms:CPFCNPJParticipanteDestinatario>\n" +
                 "            <tms:CPFCNPJParticipanteContratante></tms:CPFCNPJParticipanteContratante>\n" +
@@ -208,7 +210,7 @@ public class OperacaoTransporteService {
                     .item(0).getTextContent());
 
 
-            if (idOperacaoTransporte == 0 || idOperacaoTransporte == null){
+            if (idOperacaoTransporte == 0 || idOperacaoTransporte == null) {
 
                 LogSankhya.inserirLog(
                         element.getElementsByTagName("MensagemErro")
@@ -227,7 +229,7 @@ public class OperacaoTransporteService {
         }
     }
 
-    public static Long declararOperacaoTranporte(OperacaoTransporte operacaoTransporte){
+    public static Long declararOperacaoTranporte(OperacaoTransporte operacaoTransporte) {
 
         Long nroCIOT = 0l;
 
@@ -278,7 +280,7 @@ public class OperacaoTransporteService {
             Element element = (Element) node;
 
             if (element.getElementsByTagName("Erro")
-                    .item(0).getTextContent().contains("Tipo de Erro")){
+                    .item(0).getTextContent().contains("Tipo de Erro")) {
 
                 LogFile.logger.info("Erro na integração\n\n" + element.getElementsByTagName("Erro")
                         .item(0).getTextContent());

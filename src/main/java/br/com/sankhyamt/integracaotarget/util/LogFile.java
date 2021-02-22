@@ -16,7 +16,7 @@ public class LogFile {
         logger = Logger.getLogger("logTotal");
 
         FileHandler fileHandler;
-        String diretorio = ("C:/Users/setransportes2/sankhya/");
+        String diretorio = ("C:\\SANKHYA\\Integracao-target\\logs\\");
         String arquivo = "server.log";
 
         try {

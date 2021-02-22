@@ -15,24 +15,24 @@
                 <tms:IdOperacaoTransporte i:nil="true"/>
                 <tms:CodigoCentroDeCusto></tms:CodigoCentroDeCusto>
                 <tms:NCM>2302</tms:NCM>
-                <tms:ProprietarioCarga>1</tms:ProprietarioCarga>
-                <tms:PesoCarga>31600.0</tms:PesoCarga>
+                <tms:ProprietarioCarga>2</tms:ProprietarioCarga>
+                <tms:PesoCarga>30870.0</tms:PesoCarga>
                 <tms:TipoOperacao>1</tms:TipoOperacao>
-                <tms:MunicipioOrigemCodigoIBGE>3545308</tms:MunicipioOrigemCodigoIBGE>
-                <tms:MunicipioDestinoCodigoIBGE>3128402</tms:MunicipioDestinoCodigoIBGE>
-                <tms:DataHoraInicio>2021-02-11</tms:DataHoraInicio>
-                <tms:DataHoraTermino>2021-02-12</tms:DataHoraTermino>
+                <tms:MunicipioOrigemCodigoIBGE>5201108</tms:MunicipioOrigemCodigoIBGE>
+                <tms:MunicipioDestinoCodigoIBGE>3147907</tms:MunicipioDestinoCodigoIBGE>
+                <tms:DataHoraInicio>2021-02-22T22:10:00</tms:DataHoraInicio>
+                <tms:DataHoraTermino>2021-02-23</tms:DataHoraTermino>
                 <tms:CPFCNPJContratado>06647297626</tms:CPFCNPJContratado>
-                <tms:ValorFrete>376.0</tms:ValorFrete>
+                <tms:ValorFrete>2588.4</tms:ValorFrete>
                 <tms:ValorCombustivel>0.0</tms:ValorCombustivel>
-                <tms:ValorPedagio>0.0</tms:ValorPedagio>
+                <tms:ValorPedagio>189.9</tms:ValorPedagio>
                 <tms:ValorDespesas>0.0</tms:ValorDespesas>
-                <tms:ValorImpostoSestSenat>1.88</tms:ValorImpostoSestSenat>
-                <tms:ValorImpostoIRRF>0.0</tms:ValorImpostoIRRF>
-                <tms:ValorImpostoINSS>8.27</tms:ValorImpostoINSS>
+                <tms:ValorImpostoSestSenat>12.94</tms:ValorImpostoSestSenat>
+                <tms:ValorImpostoIRRF>15.14</tms:ValorImpostoIRRF>
+                <tms:ValorImpostoINSS>56.94</tms:ValorImpostoINSS>
                 <tms:ValorImpostoIcmsIssqn>0.0</tms:ValorImpostoIcmsIssqn>
-                <tms:ParcelaUnica>true</tms:ParcelaUnica>
-                <tms:ModoCompraValePedagio>4</tms:ModoCompraValePedagio>
+                <tms:ParcelaUnica>false</tms:ParcelaUnica>
+                <tms:ModoCompraValePedagio>2</tms:ModoCompraValePedagio>
                 <tms:CategoriaVeiculo>11</tms:CategoriaVeiculo>
                 <tms:NomeMotorista>MARCELOCAMPOS FERREIRA</tms:NomeMotorista>
                 <tms:CPFMotorista>06647297626</tms:CPFMotorista>
@@ -41,9 +41,9 @@
                 <tms:Parcelas>
                     <tms:OperacaoTransporteParcelaRequest>
                         <tms:DescricaoParcela>ADIANTAMENTO</tms:DescricaoParcela>
-                        <tms:Valor>600.0</tms:Valor>
-                        <tms:NumeroParcela>1</tms:NumeroParcela>
-                        <tms:DataVencimento>2021-02-12</tms:DataVencimento>
+                        <tms:Valor>1800.0</tms:Valor>
+                        <tms:NumeroParcela>52549</tms:NumeroParcela>
+                        <tms:DataVencimento>2021-02-23</tms:DataVencimento>
                         <tms:TipoDaParcela>1</tms:TipoDaParcela>
                         <tms:FormaPagamento>2</tms:FormaPagamento>
                         <tms:CartaoPagamento></tms:CartaoPagamento>
@@ -59,9 +59,9 @@
                     </tms:OperacaoTransporteParcelaRequest>
                     <tms:OperacaoTransporteParcelaRequest>
                         <tms:DescricaoParcela>SALDO DE FRETE</tms:DescricaoParcela>
-                        <tms:Valor>211.01</tms:Valor>
-                        <tms:NumeroParcela>2</tms:NumeroParcela>
-                        <tms:DataVencimento>2021-02-12</tms:DataVencimento>
+                        <tms:Valor>584.38</tms:Valor>
+                        <tms:NumeroParcela>52099</tms:NumeroParcela>
+                        <tms:DataVencimento>2021-02-23</tms:DataVencimento>
                         <tms:TipoDaParcela>2</tms:TipoDaParcela>
                         <tms:FormaPagamento>2</tms:FormaPagamento>
                         <tms:CartaoPagamento></tms:CartaoPagamento>
@@ -89,20 +89,20 @@
                 <tms:IdRotaModelo>14512</tms:IdRotaModelo>
                 <tms:DeduzirImpostos>true</tms:DeduzirImpostos>
                 <tms:TarifasBancarias>0.0</tms:TarifasBancarias>
-                <tms:QuantidadeTarifasBancarias>0</tms:QuantidadeTarifasBancarias>
-                <tms:IdIntegrador>OC.: 526 - EMP.: 2 - AFT.: 1 36582018</tms:IdIntegrador>
-                <tms:ValorDescontoAntecipado>17.52</tms:ValorDescontoAntecipado>
-                <tms:CPFCNPJParticipanteDestinatario>25161766000260</tms:CPFCNPJParticipanteDestinatario>
+                <tms:QuantidadeTarifasBancarias>8</tms:QuantidadeTarifasBancarias>
+                <tms:IdIntegrador>OC.: 19980 - EMP.: 1 - AFT.: 1 -1541565144</tms:IdIntegrador>
+                <tms:ValorDescontoAntecipado>119.0</tms:ValorDescontoAntecipado>
+                <tms:CPFCNPJParticipanteDestinatario>23272263000589</tms:CPFCNPJParticipanteDestinatario>
                 <tms:CPFCNPJParticipanteContratante></tms:CPFCNPJParticipanteContratante>
                 <tms:CPFCNPJParticipanteSubcontratante></tms:CPFCNPJParticipanteSubcontratante>
                 <tms:CPFCNPJParticipanteConsignatario></tms:CPFCNPJParticipanteConsignatario>
                 <tms:NumeroLacreTransporteCombustivel></tms:NumeroLacreTransporteCombustivel>
                 <tms:NumeroCartaoValePedagio>0</tms:NumeroCartaoValePedagio>
                 <tms:DocumentoValePedagio></tms:DocumentoValePedagio>
-                <tms:CEPOrigem>18160000</tms:CEPOrigem>
-                <tms:CEPDestino>36160000</tms:CEPDestino>
-                <tms:TipoCargaANTT>0</tms:TipoCargaANTT>
-                <tms:DistanciaPercorrida>0.0</tms:DistanciaPercorrida>
+                <tms:CEPOrigem>75132040</tms:CEPOrigem>
+                <tms:CEPDestino>37900000</tms:CEPDestino>
+                <tms:TipoCargaANTT>1</tms:TipoCargaANTT>
+                <tms:DistanciaPercorrida>723.0</tms:DistanciaPercorrida>
             </tms:operacao>
         </tms:CadastrarAtualizarOperacaoTransporte>
     </soapenv:Body>

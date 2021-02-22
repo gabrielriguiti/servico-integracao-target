@@ -32,7 +32,7 @@ public class DeclararCiot implements AcaoRotinaJava {
 
         Registro[] linhasSelecionadas = contextoAcao.getLinhas();
 
-        for (Registro i : linhasSelecionadas){
+        for (Registro i : linhasSelecionadas) {
 
             ordemCarga = (BigDecimal) i.getCampo("ORDEMCARGA");
             codEmp = (BigDecimal) i.getCampo("CODEMP");
@@ -43,16 +43,17 @@ public class DeclararCiot implements AcaoRotinaJava {
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type","application/json; utf-8");
-        connection.setRequestProperty("Accept","application/json");
+        connection.setRequestProperty("Content-Type", "application/json; utf-8");
+        connection.setRequestProperty("Accept", "application/json");
         connection.setDoOutput(true);
         connection.setDoInput(true);
 
         JsonObject viagem = new JsonObject();
 
-        viagem.addProperty("ordemCarga",ordemCarga);
-        viagem.addProperty("codemp",codEmp);
-        viagem.addProperty("codaft",codAfretamento);
+        viagem.addProperty("ordemCarga", ordemCarga);
+        viagem.addProperty("codemp", codEmp);
+        viagem.addProperty("codaft", codAfretamento);
+        viagem.addProperty("instrucao", 1);
 
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(connection.getOutputStream());
@@ -63,15 +64,15 @@ public class DeclararCiot implements AcaoRotinaJava {
 
             Integer httpResult = connection.getResponseCode();
 
-            if (httpResult == HttpURLConnection.HTTP_OK){
+            if (httpResult == HttpURLConnection.HTTP_OK) {
 
                 BufferedReader responseReader = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream(),"utf-8")
+                        new InputStreamReader(connection.getInputStream(), "utf-8")
                 );
 
                 String line = null;
 
-                while ((line = responseReader.readLine()) != null){
+                while ((line = responseReader.readLine()) != null) {
 
                     response.append(line + "\n");
                 }
@@ -84,26 +85,29 @@ public class DeclararCiot implements AcaoRotinaJava {
                 String idOperacao = jsonObject.get("idOperacaoTransporte").toString();
 
                 QueryExecutor queryExecutor = contextoAcao.getQuery();
-                queryExecutor.setParam("NUCIOT", nroCiot.replaceAll("\"",""));
-                queryExecutor.setParam("IDOPTRANS", idOperacao.replaceAll("\"",""));
+                queryExecutor.setParam("NUCIOT", nroCiot.replaceAll("\"", ""));
+                queryExecutor.setParam("IDOPERTRANSP", idOperacao.replaceAll("\"", ""));
                 queryExecutor.setParam("ORDEMCARGA", ordemCarga);
                 queryExecutor.setParam("CODEMP", codEmp);
-                queryExecutor.setParam("CODAFT", codAfretamento);
-                queryExecutor.update("UPDATE TMSORDAFT " +
-                        "                SET NUCIOT = {NUCIOT}, " +
-                        "                    AD_IDOPTRANS = {IDOPTRANS} " +
-                        "                WHERE CODAFT = {CODAFT} AND CODEMP = {CODEMP} " +
-                        "                AND ORDEMCARGA = {ORDEMCARGA}");
+                queryExecutor.setParam("NUAFT", codAfretamento);
+                queryExecutor.update("INSERT INTO AD_SMTDCT (NUDECLARACAO, CODEMP, ORDEMCARGA,\n" +
+                        "                       NUCIOT, NUAFT, IDOPERTRANSP, STATUSOPER)\n" +
+                        "VALUES (NEXT VALUE FOR SANKHYA.SQ_AD_SMTDCT, {CODEMP}, {ORDEMCARGA},\n" +
+                        "           {NUCIOT}, {NUAFT}, {IDOPERTRANSP}, 'A')");
                 queryExecutor.close();
+
+                contextoAcao.setMensagemRetorno("Documento declarado com sucesso!");
 
             } else {
                 contextoAcao.mostraErro("Erro ao gerar CIOT.\nConsulte a tela 'Log Integração Target' para mais informações.");
 
                 LogFile.logger.info("Erro ao gerar CIOT".concat(connection.getResponseMessage()));
             }
-        } catch (IOException e){
+        } catch (IOException e) {
 
-            contextoAcao.mostraErro(e.getMessage());
+            contextoAcao.mostraErro("Erro ao gerar CIOT.\nConsulte a tela 'Log Integração Target' para mais informações.");
+
+            LogFile.logger.info("Erro ao gerar CIOT".concat(connection.getResponseMessage()));
 
         }
     }

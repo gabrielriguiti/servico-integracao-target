@@ -1,26 +1,27 @@
-ALTER VIEW VWPARCELASAFT AS
-SELECT ISNULL(TCB.DESCRICAO, '')                        AS DESCRICAO,
-       ISNULL(SUM(ITE.VALOR), 0)                        AS VALOR,
-       FORMAT(ISNULL(ORD.DHPREVCGD, ''), 'yyyy-MM-dd')  AS DTVENC,
+ALTER
+VIEW VWPARCELASAFT AS
+SELECT ISNULL(TCB.DESCRICAO, '')                       AS DESCRICAO,
+       ISNULL(SUM(ITE.VALOR), 0)                       AS VALOR,
+       FORMAT(ISNULL(ORD.DHPREVCGD, ''), 'yyyy-MM-dd') AS DTVENC,
        CASE
            WHEN ITE.CODTIPCOB = 2 THEN 1
            WHEN ITE.CODTIPCOB = 3 THEN 2
-           ELSE 4 END                                   AS TIPPARCELA,
+           ELSE 4 END                                  AS TIPPARCELA,
        CASE
            WHEN AFT.FORMAPGTOADIANT = 'D' THEN 2
            WHEN AFT.FORMAPGTOADIANT = 'C' THEN 1
-           ELSE 0 END                                   AS FORMAPGTO,
-       ISNULL(AFT.CODBCOADIANT, 0)                      AS CODBCO,
-       ISNULL(AFT.AGENCIAADIANT, 0)                     AS CODAG,
-       ISNULL(AFT.CONTAADIANT, 0)                       AS NUMCTA,
+           ELSE 0 END                                  AS FORMAPGTO,
+       ISNULL(AFT.CODBCOADIANT, 0)                     AS CODBCO,
+       ISNULL(AFT.AGENCIAADIANT, 0)                    AS CODAG,
+       ISNULL(AFT.CONTAADIANT, 0)                      AS NUMCTA,
        CASE
            WHEN AFT.TIPOCONTAADIANT = 'P' THEN 'S'
-           ELSE 'N' END                                 AS CTAPOUP,
+           ELSE 'N' END                                AS CTAPOUP,
        ORD.ORDEMCARGA,
        AFT.CODAFT,
        AFT.CODEMP,
        ITE.CODTIPCOB,
-       ROW_NUMBER() OVER (ORDER BY TIPOCONTAADIANT ASC) AS NROPARCELA
+       ROW_NUMBER()                                       OVER (ORDER BY TIPOCONTAADIANT ASC) AS NROPARCELA
 FROM TMSORDAFTITE ITE
          INNER JOIN TMSORDAFT AFT ON AFT.CODAFT = ITE.CODAFT AND ITE.CODEMP = AFT.CODEMP
          INNER JOIN TGFORD ORD ON ORD.ORDEMCARGA = AFT.ORDEMCARGA AND ORD.CODEMP = AFT.CODEMP
@@ -28,3 +29,4 @@ FROM TMSORDAFTITE ITE
 GROUP BY TCB.DESCRICAO, ITE.CODTIPCOB, ORD.DHPREVCGD, AFT.FORMAPGTOADIANT, AFT.CODBCOADIANT,
          AFT.AGENCIAADIANT, AFT.TIPOCONTAADIANT, ORD.ORDEMCARGA, AFT.CODAFT, AFT.CODEMP,
          ITE.CODTIPCOB, AFT.CONTAADIANT
+HAVING SUM(ITE.VALOR) > 0

@@ -95,7 +95,7 @@ public class ParticipanteService {
                 "         </tms:auth>\n" +
                 "         <tms:participante>\n" +
                 "            <tms:Instrucao>1</tms:Instrucao>\n" +
-                "            <tms:IdParticipante>" + participante.getIdParticipante() + "</tms:IdParticipante>\n" +
+                "            <tms:IdParticipante>0</tms:IdParticipante>\n" +
                 "            <tms:IdDmTipoPessoa>" + participante.getIdDmTipoPessoa() + "</tms:IdDmTipoPessoa>\n" +
                 "            <tms:Nome>" + participante.getNome() + "</tms:Nome>\n" +
                 "            <tms:RazaoSocial>" + participante.getRazaoSocial() + "</tms:RazaoSocial>\n" +

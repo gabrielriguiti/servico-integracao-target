@@ -36,7 +36,7 @@ public class OperacaoTransporte {
     private Integer idRotaModelo = 14512;
     private Boolean deduzirImpostos = false;
     private Double tarifasBancarias = 0.0;
-    private Integer quantidadeTarifasBancarias = 0;
+    private Integer quantidadeTarifasBancarias = 8;
     private String idIntegrador = "";
     private Double valorDescontoAntecipado = 0.0;
     private String CPFCNPJParticipanteDestinatario = "";

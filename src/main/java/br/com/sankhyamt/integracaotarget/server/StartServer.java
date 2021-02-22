@@ -25,6 +25,10 @@ public class StartServer {
         try {
             server = HttpServer.create(new InetSocketAddress(porta),0);
             server.createContext("/target/gerarCiot/",new CiotResource());
+            server.createContext("/target/cancelarOperacao/",new CiotResource());
+            server.createContext("/target/encerrarOperacao/",new CiotResource());
+            server.createContext("/target/atualizarOperacao/",new CiotResource());
+            server.createContext("/target/emitirDocumento/",new CiotResource());
             server.setExecutor(null);
             server.start();
 

@@ -1,0 +1,9 @@
+<service>
+    <id>Servidor Integração Target</id>
+    <name>Servidor de Integração Target</name>
+    <description>Back end Intregração Target - Operações de Transporte</description>
+    <env name="HOME" value="C:\Java\workspace\servico-integracao-target\build\bin"/>
+    <executable>java</executable>
+    <arguments>-Xrs -Xmx256m -jar C:\Java\workspace\servico-integracao-target\build\bin\servico-integracao-target.jar"</arguments>
+    <logmode>rotate</logmode>
+</service>  

@@ -27,28 +27,29 @@ public class MotoristaService {
 
     /**
      * Esse método busca os dados do motorista na base de dados SANKHYA.
+     *
      * @param ordemCarga Recebe a ordem de carga da viagem.
-     * @param codemp Rece a empresa da ordem de carga.
+     * @param codemp     Rece a empresa da ordem de carga.
      * @return retorna um objeto Motorista com os dados retornado da base de dados.
      */
-    public Motorista buscarDadosMotorista(String ordemCarga, String codemp){
+    public Motorista buscarDadosMotorista(String ordemCarga, String codemp) {
 
         Motorista dadosMotorista = new Motorista();
         Connection connection = null;
 
-        String sql =  "SELECT * FROM VWDADOSMOTTMS \n" +
+        String sql = "SELECT * FROM VWDADOSMOTTMS \n" +
                 "WHERE ORDEMCARGA = ? AND CODEMP = ?";
 
         try {
             connection = ConnectionSQLServer.connection();
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,ordemCarga);
-            statement.setString(2,codemp);
+            statement.setString(1, ordemCarga);
+            statement.setString(2, codemp);
 
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()){
+            if (rs.next()) {
                 dadosMotorista.setNome(rs.getString("NOME").trim());
                 dadosMotorista.setSobrenome(rs.getString("SOBRENOME").trim());
                 dadosMotorista.setCpf(rs.getString("CPF").trim());
@@ -92,11 +93,12 @@ public class MotoristaService {
 
     /**
      * Esse método salva um motorista na base de dados TARGET.
-     * @param motorista Recebe um objeto com os dados do motorista.
+     *
+     * @param motorista     Recebe um objeto com os dados do motorista.
      * @param transportador Recebe um objeto com os dados do transportador.
      * @return Retorna o ID do motorista salvo na base de dados TARGER.
      */
-   public Integer cadastrarAtualizarMotorista(Motorista motorista, Transportador transportador) {
+    public Integer cadastrarAtualizarMotorista(Motorista motorista, Transportador transportador) {
 
         Integer idMotorista = 0;
 
@@ -131,7 +133,7 @@ public class MotoristaService {
                 "            <tms:Nacionalidade>" + motorista.getNacionalidade() + "</tms:Nacionalidade>\n" +
                 "            <tms:Endereco>" + motorista.getEndereco() + "</tms:Endereco>\n" +
                 "            <tms:NumeroEndereco>" + motorista.getNumero() + "</tms:NumeroEndereco>\n" +
-                "            <tms:EnderecoComplemento>" + motorista.enderecoCompleto() + "</tms:EnderecoComplemento>\n" +
+                "            <tms:EnderecoComplemento>" + motorista.enderecoCompleto().substring(0,30) + "</tms:EnderecoComplemento>\n" +
                 "            <tms:CEP>" + motorista.getCep() + "</tms:CEP>\n" +
                 "            <tms:Bairro>" + motorista.getBairro() + "</tms:Bairro>\n" +
                 "            <tms:CodigoIBGEMunicipio>" + motorista.getCodigoIBGEMunicipio() + "</tms:CodigoIBGEMunicipio>\n" +
@@ -175,8 +177,16 @@ public class MotoristaService {
 
             Element element = (Element) node;
 
+            if (!element.getElementsByTagName("IdMotorista")
+                    .item(0).getTextContent().equals("0")){
+                idMotorista = Integer.valueOf(element.getElementsByTagName("IdMotorista")
+                        .item(0).getTextContent());
+
+                return idMotorista;
+            }
+
             if (element.getElementsByTagName("Erro")
-                    .item(0).getTextContent().contains("Tipo de Erro")){
+                    .item(0).getTextContent().contains("Tipo de Erro")) {
 
                 LogSankhya.inserirLog(
                         element.getElementsByTagName("MensagemErro")
@@ -189,16 +199,26 @@ public class MotoristaService {
                 throw new IntegracaoException("Erro na integração\n\n" + element.getElementsByTagName("Erro")
                         .item(0).getTextContent());
 
-            } else {
-                idMotorista = Integer.valueOf(element.getElementsByTagName("IdMotorista")
-                        .item(0).getTextContent());
+            } else if (element.getElementsByTagName("MensagemErro")
+                    .item(0).getTextContent() != null) {
 
-                return idMotorista;
+                LogSankhya.inserirLog(
+                        element.getElementsByTagName("MensagemErro")
+                                .item(0).getTextContent(),
+                        element.getElementsByTagName("Erro")
+                                .item(0).getTextContent(),
+                        request
+                );
+
+                throw new IntegracaoException("Erro na integração\n\n" + element.getElementsByTagName("Erro")
+                        .item(0).getTextContent());
             }
 
         } catch (SOAPException | IOException | SQLException e) {
 
             throw new IntegracaoException("Erro na integração\n\n" + e.getMessage());
         }
+
+        return 0;
     }
 }

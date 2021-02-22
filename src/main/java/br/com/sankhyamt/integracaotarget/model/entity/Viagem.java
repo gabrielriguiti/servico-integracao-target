@@ -8,10 +8,19 @@ package br.com.sankhyamt.integracaotarget.model.entity;
  */
 public class Viagem {
 
-    private String proprietarioANTT;
-    private String ordemCarga;
-    private String codEmp;
-    private String codAfretamento;
+    private String proprietarioANTT = "0";
+    private String ordemCarga = "0";
+    private String codEmp = "0";
+    private String codAfretamento = "0";
+    private String idOperacao = "0";
+
+    public String getIdOperacao() {
+        return idOperacao;
+    }
+
+    public void setIdOperacao(String idOperacao) {
+        this.idOperacao = idOperacao;
+    }
 
     public String getProprietarioANTT() {
         return proprietarioANTT;

@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tms="http://tmsfrete.v2.targetmp.com.br">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <tms:CancelarOperacaoTransporte>
+            <tms:auth>
+                <tms:Usuario>tms.sankhya2</tms:Usuario>
+                <tms:Senha>123@Mudar</tms:Senha>
+                <tms:Token></tms:Token>
+            </tms:auth>
+            <tms:cancelamentoOperacaoRequest>
+                <tms:IdOperacao>9711</tms:IdOperacao>
+                <tms:MotivoCancelamento>Cancelamento para teste de método.</tms:MotivoCancelamento>
+            </tms:cancelamentoOperacaoRequest>
+        </tms:CancelarOperacaoTransporte>
+    </soapenv:Body>
+</soapenv:Envelope>

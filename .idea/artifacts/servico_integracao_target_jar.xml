@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact name="servico-integracao-target:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/servico_integracao_target_jar</output-path>
+    <root id="root">
+      <element id="archive" name="servico-integracao-target.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/Integracao-target/bin/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="servico-integracao-target" />
+      </element>
+      <element id="library" level="project" name="Maven: javax.xml.stream:stax-api:1.0-2" />
+      <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
+      <element id="library" level="project" name="SankhyaW-extensions" />
+      <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+      <element id="library" level="project" name="Maven: com.microsoft.sqlserver:mssql-jdbc:7.0.0.jre8" />
+      <element id="library" level="project" name="Maven: com.sun.xml.messaging.saaj:saaj-impl:1.4.0" />
+      <element id="library" level="project" name="Maven: org.jvnet.mimepull:mimepull:1.9.7" />
+      <element id="library" level="project" name="Maven: javax.xml.soap:javax.xml.soap-api:1.4.0" />
+      <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.7.8" />
+    </root>
+  </artifact>
+</component>
