@@ -1,0 +1,10 @@
+br.com.sankhyamt.integracaotarget
+br.com.sankhyamt.integracaotarget.api
+br.com.sankhyamt.integracaotarget.exception
+br.com.sankhyamt.integracaotarget.extension
+br.com.sankhyamt.integracaotarget.model.database
+br.com.sankhyamt.integracaotarget.model.entity
+br.com.sankhyamt.integracaotarget.properties
+br.com.sankhyamt.integracaotarget.server
+br.com.sankhyamt.integracaotarget.service
+br.com.sankhyamt.integracaotarget.util
