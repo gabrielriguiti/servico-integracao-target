@@ -24,8 +24,8 @@ import java.sql.SQLException;
  * Classe que possui os serviçõs relacionados ao transportador.
  *
  * @author Gabriel Riguiti
+ * @version 1.2
  * @since v1.0
- * @version 1.1
  */
 public class TransportadorService {
 
@@ -43,7 +43,10 @@ public class TransportadorService {
 
         final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
-        String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+        String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
+                "xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\"\n " +
+                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
                 "   <soapenv:Header/>\n" +
                 "   <soapenv:Body>\n" +
                 "      <tms:CadastrarAtualizarTransportador>\n" +
@@ -64,7 +67,8 @@ public class TransportadorService {
                 "            <tms:OrgaoEmissorRg>" + transportador.getOrgaoEmissorRg() + "</tms:OrgaoEmissorRg>\n" +
                 "            <tms:CNH>" + transportador.getCNH() + "</tms:CNH>\n" +
                 "            <tms:TipoCNH>" + transportador.getTipoCNH() + "</tms:TipoCNH>\n" +
-                "            <tms:DataValidadeCNH>" + transportador.getDataValidadeCNH() + "</tms:DataValidadeCNH>\n" +
+                (!transportador.getDataValidadeCNH().equals("1900-01-01") ? "            <tms:DataValidadeCNH>" + transportador.getDataValidadeCNH() + "</tms:DataValidadeCNH>\n" :
+                        "            <tms:DataValidadeCNH i:nil=\"true\"/>\n") +
                 "            <tms:Sexo>" + transportador.getSexo() + "</tms:Sexo>\n" +
                 "            <tms:Naturalidade>" + transportador.getNaturalidade() + "</tms:Naturalidade>\n" +
                 "            <tms:Nacionalidade>" + transportador.getNacionalidade() + "</tms:Nacionalidade>\n" +
@@ -244,3 +248,4 @@ public class TransportadorService {
 
 
 // v1.1 - Implementação da formatação do request, para retirar caracteres especiais
+// v1.2 - Correção de bug no campo DataValidadeCNH quando for vazio

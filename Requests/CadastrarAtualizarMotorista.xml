@@ -1,41 +1,42 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tms="http://tmsfrete.v2.targetmp.com.br">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:tms="http://tmsfrete.v2.targetmp.com.br">
     <soapenv:Header/>
     <soapenv:Body>
         <tms:CadastrarAtualizarMotorista>
             <tms:auth>
-                <tms:Usuario>tms.sankhya2</tms:Usuario>
-                <tms:Senha>123@Mudar</tms:Senha>
+                <tms:Usuario>setransportes.tms</tms:Usuario>
+                <tms:Senha>Se@08289</tms:Senha>
                 <tms:Token></tms:Token>
             </tms:auth>
             <tms:motorista>
                 <tms:Instrucao>1</tms:Instrucao>
-                <tms:CPFCNPJTransportador>06647297626</tms:CPFCNPJTransportador>
+                <tms:CPFCNPJTransportador>03235544666</tms:CPFCNPJTransportador>
                 <tms:IdMotorista>0</tms:IdMotorista>
                 <tms:Nome>MARCELO</tms:Nome>
-                <tms:Sobrenome>CAMPOS FERREIRA</tms:Sobrenome>
-                <tms:CPF>06647297626</tms:CPF>
-                <tms:NumeroRG></tms:NumeroRG>
-                <tms:OrgaoEmissorRg>SSP</tms:OrgaoEmissorRg>
-                <tms:DataNascimento>1975-06-16</tms:DataNascimento>
+                <tms:Sobrenome>GILBERTO DE FREITAS</tms:Sobrenome>
+                <tms:CPF>05190787648</tms:CPF>
+                <tms:NumeroRG>12582061</tms:NumeroRG>
+                <tms:OrgaoEmissorRg></tms:OrgaoEmissorRg>
+                <tms:DataNascimento>1983-07-05</tms:DataNascimento>
                 <tms:Sexo>M</tms:Sexo>
                 <tms:EstadoCivil>0</tms:EstadoCivil>
-                <tms:NomePai>ALFEU MOYSES FERREIRA</tms:NomePai>
-                <tms:NomeMae>FLORISBELA CAMPOS</tms:NomeMae>
-                <tms:Email>email@email.com.br</tms:Email>
-                <tms:Telefone>11  83998880</tms:Telefone>
-                <tms:TelefoneCelular>1183998880</tms:TelefoneCelular>
+                <tms:NomePai>PATRICIO ALVES DE</tms:NomePai>
+                <tms:NomeMae>MARTA HELENA DE ASSUNCAO FREITAS</tms:NomeMae>
+                <tms:Email></tms:Email>
+                <tms:Telefone>37 998713810</tms:Telefone>
+                <tms:TelefoneCelular>37 998719987</tms:TelefoneCelular>
                 <tms:Nacionalidade>0</tms:Nacionalidade>
-                <tms:Endereco>FORTUNATO PULHERINI</tms:Endereco>
-                <tms:NumeroEndereco>67</tms:NumeroEndereco>
-                <tms:EnderecoComplemento>Rua FORTUNATO PULHERINI, 67, MUTINGA</tms:EnderecoComplemento>
-                <tms:CEP>06286080</tms:CEP>
-                <tms:Bairro>MUTINGA</tms:Bairro>
-                <tms:CodigoIBGEMunicipio>3534401</tms:CodigoIBGEMunicipio>
-                <tms:CodigoBanco>341</tms:CodigoBanco>
-                <tms:CodigoAgencia>0734</tms:CodigoAgencia>
+                <tms:Endereco>RUI BARBOSA MENDONCA</tms:Endereco>
+                <tms:NumeroEndereco>280</tms:NumeroEndereco>
+                <tms:EnderecoComplemento>Rua RUI BARBOSA MENDONCA, 280,</tms:EnderecoComplemento>
+                <tms:CEP>35620000</tms:CEP>
+                <tms:Bairro>CENTRO</tms:Bairro>
+                <tms:CodigoIBGEMunicipio>3100203</tms:CodigoIBGEMunicipio>
+                <tms:CodigoBanco>756</tms:CodigoBanco>
+                <tms:CodigoAgencia>3141</tms:CodigoAgencia>
                 <tms:DigitoAgencia>0</tms:DigitoAgencia>
-                <tms:ContaCorrente>58077-2</tms:ContaCorrente>
-                <tms:DigitoContaCorrente>58077-2</tms:DigitoContaCorrente>
+                <tms:ContaCorrente>27286</tms:ContaCorrente>
+                <tms:DigitoContaCorrente>27286</tms:DigitoContaCorrente>
                 <tms:FlagContaPoupanca>false</tms:FlagContaPoupanca>
                 <tms:VariacaoContaPoupanca>0</tms:VariacaoContaPoupanca>
                 <tms:Ativo>true</tms:Ativo>
