@@ -94,10 +94,22 @@ public class DeclararCiot implements AcaoRotinaJava {
                 queryExecutor.setParam("ORDEMCARGA", ordemCarga);
                 queryExecutor.setParam("CODEMP", codEmp);
                 queryExecutor.setParam("NUAFT", codAfretamento);
-                queryExecutor.update("INSERT INTO AD_SMTDCT (NUDECLARACAO, CODEMP, ORDEMCARGA,\n" +
-                        "                       NUCIOT, NUAFT, IDOPERTRANSP, STATUSOPER)\n" +
-                        "VALUES (NEXT VALUE FOR SANKHYA.SQ_AD_SMTDCT, {CODEMP}, {ORDEMCARGA},\n" +
-                        "           {NUCIOT}, {NUAFT}, {IDOPERTRANSP}, 'A')");
+
+                if (!nroCiot.replace("\"", "").equals("D")){
+
+                    queryExecutor.update("INSERT INTO AD_SMTDCT (NUDECLARACAO, CODEMP, ORDEMCARGA,\n" +
+                            "                       NUCIOT, NUAFT, IDOPERTRANSP, STATUSOPER)\n" +
+                            "VALUES (NEXT VALUE FOR SANKHYA.SQ_AD_SMTDCT, {CODEMP}, {ORDEMCARGA},\n" +
+                            "           {NUCIOT}, {NUAFT}, {IDOPERTRANSP}, 'A')");
+
+                } else {
+
+                    queryExecutor.update("INSERT INTO AD_SMTDCT (NUDECLARACAO, CODEMP, ORDEMCARGA,\n" +
+                            "                       NUAFT, IDOPERTRANSP, STATUSOPER)\n" +
+                            "VALUES (NEXT VALUE FOR SANKHYA.SQ_AD_SMTDCT, {CODEMP}, {ORDEMCARGA},\n" +
+                            "            {NUAFT}, {IDOPERTRANSP}, 'D')");
+                }
+
                 queryExecutor.close();
 
                 contextoAcao.setMensagemRetorno("Documento declarado com sucesso!");

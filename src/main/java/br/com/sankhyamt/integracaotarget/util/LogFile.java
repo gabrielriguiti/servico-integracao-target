@@ -16,7 +16,7 @@ public class LogFile {
     public static Logger logger;
 
     /**
-     * Cria o arquivo de log.
+     * Cria o arquivo de log.   
      */
     public static void createLog(){
 

@@ -1,0 +1,62 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tms="http://tmsfrete.v2.targetmp.com.br" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <tms:CadastrarAtualizarTransportador>
+            <tms:auth>
+                <tms:Usuario>setransportes.tms</tms:Usuario>
+                <tms:Senha>Se@08289</tms:Senha>
+                <tms:Token></tms:Token>
+            </tms:auth>
+            <tms:transportador>
+                <tms:Instrucao>1</tms:Instrucao>
+                <tms:RNTRC>45500990</tms:RNTRC>
+                <tms:CPFCNPJ>95736670968</tms:CPFCNPJ>
+                <tms:Nome>PAULO LEANDRO KATCZROUSKI</tms:Nome>
+                <tms:Sobrenome> LEANDRO KATCZROUSKI</tms:Sobrenome>
+                <tms:RazaoSocial>PAULO LEANDRO KATCZROUSKI</tms:RazaoSocial>
+                <tms:DataNascimento>1976-06-28</tms:DataNascimento>
+                <tms:RG>64402188</tms:RG>
+                <tms:OrgaoEmissorRg></tms:OrgaoEmissorRg>
+                <tms:CNH>1876718398</tms:CNH>
+                <tms:TipoCNH>E</tms:TipoCNH>
+                <tms:DataValidadeCNH>1976-06-28</tms:DataValidadeCNH>
+                <tms:Sexo>M</tms:Sexo>
+                <tms:Naturalidade>0</tms:Naturalidade>
+                <tms:Nacionalidade>0</tms:Nacionalidade>
+                <tms:InscricaoEstadual>64402188</tms:InscricaoEstadual>
+                <tms:InscricaoMunicipal></tms:InscricaoMunicipal>
+                <tms:NomeFantasia>PAULO LEANDRO KATCZROUSKI</tms:NomeFantasia>
+                <tms:DataInscricao>2020-11-13</tms:DataInscricao>
+                <tms:IdDmAtividadeEconomica>0</tms:IdDmAtividadeEconomica>
+                <tms:Endereco>RUTÍLIO LOURES RIBAS</tms:Endereco>
+                <tms:NumeroEndereco>101</tms:NumeroEndereco>
+                <tms:EnderecoComplemento></tms:EnderecoComplemento>
+                <tms:Bairro>PRIMAVERA</tms:Bairro>
+                <tms:CEP>85050200</tms:CEP>
+                <tms:CodigoIBGEMunicipio>4109401</tms:CodigoIBGEMunicipio>
+                <tms:IdentificadorEndereco>85050200</tms:IdentificadorEndereco>
+                <tms:TelefoneFixo>6434048090</tms:TelefoneFixo>
+                <tms:TelefoneCelular>4299055431</tms:TelefoneCelular>
+                <tms:EstadoCivil>0</tms:EstadoCivil>
+                <tms:Email>contato@setransportes.com.br</tms:Email>
+                <tms:Usuario>95736670968</tms:Usuario>
+                <tms:CodigoBanco>237</tms:CodigoBanco>
+                <tms:CodigoAgencia>0894</tms:CodigoAgencia>
+                <tms:DigitoAgencia>0</tms:DigitoAgencia>
+                <tms:ContaCorrente>4137-1</tms:ContaCorrente>
+                <tms:DigitoContaCorrente></tms:DigitoContaCorrente>
+                <tms:FlagContaPoupanca>false</tms:FlagContaPoupanca>
+                <tms:VariacaoContaPoupanca></tms:VariacaoContaPoupanca>
+                <tms:NomeContato></tms:NomeContato>
+                <tms:CargoContato></tms:CargoContato>
+                <tms:CPFCNPJContato></tms:CPFCNPJContato>
+                <tms:TelefoneFixoContato>0</tms:TelefoneFixoContato>
+                <tms:TelefoneCelularContato>0</tms:TelefoneCelularContato>
+                <tms:EmailContato>contato@setransportes.com.br</tms:EmailContato>
+                <tms:DataNascimentoContato>1900-01-01</tms:DataNascimentoContato>
+                <tms:RGContato></tms:RGContato>
+                <tms:OrgaoEmissorRgContato></tms:OrgaoEmissorRgContato>
+            </tms:transportador>
+        </tms:CadastrarAtualizarTransportador>
+    </soapenv:Body>
+</soapenv:Envelope>

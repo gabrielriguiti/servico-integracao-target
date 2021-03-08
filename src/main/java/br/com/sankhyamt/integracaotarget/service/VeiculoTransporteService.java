@@ -11,6 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @version 1.0
+ * @since v1.0
+ */
 public class VeiculoTransporteService {
 
     /**

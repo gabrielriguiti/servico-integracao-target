@@ -6,6 +6,7 @@ import br.com.sankhyamt.integracaotarget.model.entity.*;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
 import br.com.sankhyamt.integracaotarget.util.LogSankhya;
+import br.com.sankhyamt.integracaotarget.util.RequestFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 
 /**
  * @since v1.0
- * @version 1.0
+ * @version 1.1
  */
 public class CiotService {
 
@@ -38,7 +39,7 @@ public class CiotService {
 
         String[] dadosCiot = new String[2];
 
-        Long nroCiot = 0l;
+        String nroCiot = "0";
 
         Transportador transportador;
         Motorista motorista;
@@ -54,17 +55,23 @@ public class CiotService {
             transportador.setIdTransportador(transportadorService
                     .cadastrarAtualizarTransportador(transportador));
 
+            LogFile.logger.info("Transportador: " + transportador.getIdTransportador());
+
             motorista = motoristaService.buscarDadosMotorista(
                     viagem.getOrdemCarga(), viagem.getCodEmp());
 
             motorista.setIdMotorista(motoristaService
                     .cadastrarAtualizarMotorista(motorista, transportador));
 
+            LogFile.logger.info("Motorista: " + motorista.getIdMotorista());
+
             participante = participanteService.buscarDadosParticipante(
                     viagem.getOrdemCarga(), viagem.getCodEmp());
 
             participante.setIdParticipante(participanteService
                     .cadastrarAtualizarParticipante(participante));
+
+            LogFile.logger.info("Participante: " + participante.getIdParticipante());
 
             operacaoTransporte = OperacaoTransporteService.buscarDadosOperacaoTranporte(viagem);
 
@@ -79,14 +86,14 @@ public class CiotService {
 
             nroCiot = OperacaoTransporteService.declararOperacaoTranporte(operacaoTransporte);
 
-            dadosCiot[0] = nroCiot.toString();
+            dadosCiot[0] = nroCiot;
             dadosCiot[1] = operacaoTransporte.getIdOperacaoTransporte().toString();
 
             return dadosCiot;
 
         } catch (SQLException e) {
 
-            LogFile.logger.info("Erro ao gerar CIOT\n".concat(e.getMessage()));
+            LogFile.logger.info("Erro ao declarar CIOT\n".concat(e.getMessage()));
 
             LogSankhya.inserirLog(e.getMessage(),"","");
 
@@ -94,7 +101,7 @@ public class CiotService {
 
         } catch (Exception e) {
 
-            LogFile.logger.info("Erro ao gerar CIOT\n".concat(e.getMessage()));
+            LogFile.logger.info("Erro ao emitir documento: \n".concat(e.getMessage()));
 
         }
 
@@ -108,7 +115,7 @@ public class CiotService {
      */
     public static String emitirCiot(String idOperacaoTransporte) {
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
         String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\">\n" +
                 "   <soapenv:Header/>\n" +
@@ -142,7 +149,7 @@ public class CiotService {
             MessageFactory messageFactory = MessageFactory.newInstance();
 
             SOAPMessage soapMessage = messageFactory.createMessage(headers,
-                    (new ByteArrayInputStream(request.getBytes())));
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request).getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -192,7 +199,7 @@ public class CiotService {
 
         String idCancelamento = "0";
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
         String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\">\n" +
                 "    <soapenv:Header/>\n" +
@@ -226,7 +233,7 @@ public class CiotService {
             MessageFactory messageFactory = MessageFactory.newInstance();
 
             SOAPMessage soapMessage = messageFactory.createMessage(headers,
-                    (new ByteArrayInputStream(request.getBytes())));
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request).getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -279,7 +286,7 @@ public class CiotService {
 
         String idEncerramento = "0";
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
         String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
                 "xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
@@ -313,7 +320,7 @@ public class CiotService {
             MessageFactory messageFactory = MessageFactory.newInstance();
 
             SOAPMessage soapMessage = messageFactory.createMessage(headers,
-                    (new ByteArrayInputStream(request.getBytes())));
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request).getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -358,3 +365,6 @@ public class CiotService {
     }
 
 }
+
+
+// v1.1 - Implementação da formatação do request, para retirar caracteres especiais

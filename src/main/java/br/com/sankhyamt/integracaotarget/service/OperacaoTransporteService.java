@@ -7,6 +7,7 @@ import br.com.sankhyamt.integracaotarget.model.entity.*;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
 import br.com.sankhyamt.integracaotarget.util.LogSankhya;
+import br.com.sankhyamt.integracaotarget.util.RequestFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,6 +25,7 @@ import java.util.Random;
 /**
  * Classe com os serviços da Operação de Transporte.
  *
+ * @version 1.2
  * @since v1.0
  */
 public class OperacaoTransporteService {
@@ -79,6 +81,7 @@ public class OperacaoTransporteService {
                 operacaoTransporte.setCEPDestino(resultSet.getString("CEPDESTINO"));
                 operacaoTransporte.setTipoCargaANTT(resultSet.getInt("TIPCARGAANTT"));
                 operacaoTransporte.setDistanciaPercorrida(resultSet.getDouble("DISTANCIA"));
+                operacaoTransporte.setIdRotaModelo(resultSet.getInt("IDROTA"));
             }
 
         } catch (SQLException e) {
@@ -96,11 +99,12 @@ public class OperacaoTransporteService {
 
     /**
      * Cadastra/Atualiza a operação de Transporte.
+     *
      * @param operacaoTransporte Recebe uma instância de OperacaoTransporte com os dados da operação.
-     * @param transportador Recebe uma instância de Transporte com os dados do operador.
-     * @param motorista Recebe uma instância de Motorista com os dados do motorista.
-     * @param participante Recebe uma instância de Participante com os dados do participante.
-     * @param viagem Recebe uma instância de Viagem com os dados da viagem.
+     * @param transportador      Recebe uma instância de Transporte com os dados do operador.
+     * @param motorista          Recebe uma instância de Motorista com os dados do motorista.
+     * @param participante       Recebe uma instância de Participante com os dados do participante.
+     * @param viagem             Recebe uma instância de Viagem com os dados da viagem.
      * @return Retorna o ID da Operação de Transporte
      */
     public static Integer cadastrarAtualizarOperacaoTransporte(
@@ -111,7 +115,7 @@ public class OperacaoTransporteService {
 
         Random id = new Random();
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
         StringBuilder request = new StringBuilder();
 
@@ -202,7 +206,8 @@ public class OperacaoTransporteService {
             MessageFactory messageFactory = MessageFactory.newInstance();
 
             SOAPMessage soapMessage = messageFactory.createMessage(headers,
-                    (new ByteArrayInputStream(request.toString().getBytes())));
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request.toString())
+                            .getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -239,14 +244,15 @@ public class OperacaoTransporteService {
 
     /**
      * Declara a operação de Transporte
+     *
      * @param operacaoTransporte
      * @return Retorna o número do CIOT.
      */
-    public static Long declararOperacaoTranporte(OperacaoTransporte operacaoTransporte) {
+    public static String declararOperacaoTranporte(OperacaoTransporte operacaoTransporte) {
 
-        Long nroCIOT = 0l;
+        String nroCIOT = "0";
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
         String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
                 "xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\">\n" +
@@ -280,7 +286,7 @@ public class OperacaoTransporteService {
             MessageFactory messageFactory = MessageFactory.newInstance();
 
             SOAPMessage soapMessage = messageFactory.createMessage(headers,
-                    (new ByteArrayInputStream(request.toString().getBytes())));
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request).getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -311,8 +317,18 @@ public class OperacaoTransporteService {
 
             } else {
 
-                nroCIOT = Long.valueOf(element.getElementsByTagName("NumeroCIOT")
-                        .item(0).getTextContent());
+                if (!element.getElementsByTagName("NumeroCIOT")
+                        .item(0).getTextContent().equals("")){
+
+                    nroCIOT = element.getElementsByTagName("NumeroCIOT")
+                            .item(0).getTextContent();
+                    LogFile.logger.info(element.getElementsByTagName("NumeroCIOT")
+                            .item(0).getTextContent());
+
+                } else {
+
+                    nroCIOT = "D";
+                }
 
                 return nroCIOT;
             }
@@ -323,3 +339,6 @@ public class OperacaoTransporteService {
         }
     }
 }
+
+
+// v1.2 - Implementação da formatação do request, para retirar caracteres especiais

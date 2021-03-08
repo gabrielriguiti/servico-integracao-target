@@ -1,0 +1,30 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:tms="http://tmsfrete.v2.targetmp.com.br">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <tms:CadastrarAtualizarParticipante>
+            <tms:auth>
+                <tms:Usuario>setransportes.tms</tms:Usuario>
+                <tms:Senha>Se@08289</tms:Senha>
+                <tms:Token></tms:Token>
+            </tms:auth>
+            <tms:participante>
+                <tms:Instrucao>1</tms:Instrucao>
+                <tms:IdParticipante>0</tms:IdParticipante>
+                <tms:IdDmTipoPessoa>2</tms:IdDmTipoPessoa>
+                <tms:Nome>NUTRISOMA IND. E COM. DE</tms:Nome>
+                <tms:RazaoSocial>NUTRISOMA IND. E COM. DE RACOES LTDA</tms:RazaoSocial>
+                <tms:CPFCNPJ>71141022000110</tms:CPFCNPJ>
+                <tms:Endereco>FARIA PEREIRA</tms:Endereco>
+                <tms:Bairro>DIST INDUSTRIAL</tms:Bairro>
+                <tms:CEP>38740000</tms:CEP>
+                <tms:MunicipioCodigoIBGE>3148103</tms:MunicipioCodigoIBGE>
+                <tms:RNTRC></tms:RNTRC>
+                <tms:Ativo>true</tms:Ativo>
+                <tms:Email>cobranca@racoesvereda.com.br</tms:Email>
+                <tms:Telefone>34 991647239</tms:Telefone>
+                <tms:TelefoneCelular></tms:TelefoneCelular>
+            </tms:participante>
+        </tms:CadastrarAtualizarParticipante>
+    </soapenv:Body>
+</soapenv:Envelope>

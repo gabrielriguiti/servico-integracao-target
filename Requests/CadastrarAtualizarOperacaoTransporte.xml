@@ -6,8 +6,8 @@
     <soapenv:Body>
         <tms:CadastrarAtualizarOperacaoTransporte>
             <tms:auth>
-                <tms:Usuario>tms.sankhya2</tms:Usuario>
-                <tms:Senha>123@Mudar</tms:Senha>
+                <tms:Usuario>setransportes.tms</tms:Usuario>
+                <tms:Senha>Se@08289</tms:Senha>
                 <tms:Token></tms:Token>
             </tms:auth>
             <tms:operacao>
@@ -15,41 +15,41 @@
                 <tms:IdOperacaoTransporte i:nil="true"/>
                 <tms:CodigoCentroDeCusto></tms:CodigoCentroDeCusto>
                 <tms:NCM>2302</tms:NCM>
-                <tms:ProprietarioCarga>2</tms:ProprietarioCarga>
-                <tms:PesoCarga>30870.0</tms:PesoCarga>
+                <tms:ProprietarioCarga>1</tms:ProprietarioCarga>
+                <tms:PesoCarga>31480.0</tms:PesoCarga>
                 <tms:TipoOperacao>1</tms:TipoOperacao>
-                <tms:MunicipioOrigemCodigoIBGE>5201108</tms:MunicipioOrigemCodigoIBGE>
-                <tms:MunicipioDestinoCodigoIBGE>3147907</tms:MunicipioDestinoCodigoIBGE>
-                <tms:DataHoraInicio>2021-02-22T22:10:00</tms:DataHoraInicio>
-                <tms:DataHoraTermino>2021-02-23</tms:DataHoraTermino>
-                <tms:CPFCNPJContratado>06647297626</tms:CPFCNPJContratado>
-                <tms:ValorFrete>2588.4</tms:ValorFrete>
+                <tms:MunicipioOrigemCodigoIBGE>5203500</tms:MunicipioOrigemCodigoIBGE>
+                <tms:MunicipioDestinoCodigoIBGE>4127700</tms:MunicipioDestinoCodigoIBGE>
+                <tms:DataHoraInicio>2021-03-05T13:30:00</tms:DataHoraInicio>
+                <tms:DataHoraTermino>2021-03-08</tms:DataHoraTermino>
+                <tms:CPFCNPJContratado>02689189000105</tms:CPFCNPJContratado>
+                <tms:ValorFrete>5351.6</tms:ValorFrete>
                 <tms:ValorCombustivel>0.0</tms:ValorCombustivel>
-                <tms:ValorPedagio>189.9</tms:ValorPedagio>
+                <tms:ValorPedagio>0.0</tms:ValorPedagio>
                 <tms:ValorDespesas>0.0</tms:ValorDespesas>
-                <tms:ValorImpostoSestSenat>12.94</tms:ValorImpostoSestSenat>
-                <tms:ValorImpostoIRRF>15.14</tms:ValorImpostoIRRF>
-                <tms:ValorImpostoINSS>56.94</tms:ValorImpostoINSS>
+                <tms:ValorImpostoSestSenat>0.0</tms:ValorImpostoSestSenat>
+                <tms:ValorImpostoIRRF>0.0</tms:ValorImpostoIRRF>
+                <tms:ValorImpostoINSS>0.0</tms:ValorImpostoINSS>
                 <tms:ValorImpostoIcmsIssqn>0.0</tms:ValorImpostoIcmsIssqn>
                 <tms:ParcelaUnica>false</tms:ParcelaUnica>
-                <tms:ModoCompraValePedagio>2</tms:ModoCompraValePedagio>
+                <tms:ModoCompraValePedagio>4</tms:ModoCompraValePedagio>
                 <tms:CategoriaVeiculo>11</tms:CategoriaVeiculo>
-                <tms:NomeMotorista>MARCELOCAMPOS FERREIRA</tms:NomeMotorista>
-                <tms:CPFMotorista>06647297626</tms:CPFMotorista>
-                <tms:RNTRCMotorista>004172046</tms:RNTRCMotorista>
+                <tms:NomeMotorista>SIRLENECAETANO DA SILVA</tms:NomeMotorista>
+                <tms:CPFMotorista>05496726999</tms:CPFMotorista>
+                <tms:RNTRCMotorista>0</tms:RNTRCMotorista>
                 <tms:ItemFinanceiro></tms:ItemFinanceiro>
                 <tms:Parcelas>
                     <tms:OperacaoTransporteParcelaRequest>
-                        <tms:DescricaoParcela>ADIANTAMENTO</tms:DescricaoParcela>
-                        <tms:Valor>1800.0</tms:Valor>
-                        <tms:NumeroParcela>52549</tms:NumeroParcela>
-                        <tms:DataVencimento>2021-02-23</tms:DataVencimento>
-                        <tms:TipoDaParcela>1</tms:TipoDaParcela>
+                        <tms:DescricaoParcela>SALDO DE FRETE</tms:DescricaoParcela>
+                        <tms:Valor>1055.28</tms:Valor>
+                        <tms:NumeroParcela>79018</tms:NumeroParcela>
+                        <tms:DataVencimento>2021-03-08</tms:DataVencimento>
+                        <tms:TipoDaParcela>3</tms:TipoDaParcela>
                         <tms:FormaPagamento>2</tms:FormaPagamento>
                         <tms:CartaoPagamento></tms:CartaoPagamento>
-                        <tms:CodigoBanco>341</tms:CodigoBanco>
-                        <tms:AgenciaDeposito>0734</tms:AgenciaDeposito>
-                        <tms:ContaDeposito>58077-2</tms:ContaDeposito>
+                        <tms:CodigoBanco>748</tms:CodigoBanco>
+                        <tms:AgenciaDeposito>0715</tms:AgenciaDeposito>
+                        <tms:ContaDeposito>85855-2</tms:ContaDeposito>
                         <tms:DigitoContaDeposito>0</tms:DigitoContaDeposito>
                         <tms:ProcessarAutomaticamente>true</tms:ProcessarAutomaticamente>
                         <tms:IdOperacaoTransporteParcela>0</tms:IdOperacaoTransporteParcela>
@@ -58,16 +58,16 @@
                         <tms:ItemFinanceiroParcela></tms:ItemFinanceiroParcela>
                     </tms:OperacaoTransporteParcelaRequest>
                     <tms:OperacaoTransporteParcelaRequest>
-                        <tms:DescricaoParcela>SALDO DE FRETE</tms:DescricaoParcela>
-                        <tms:Valor>584.38</tms:Valor>
-                        <tms:NumeroParcela>52099</tms:NumeroParcela>
-                        <tms:DataVencimento>2021-02-23</tms:DataVencimento>
-                        <tms:TipoDaParcela>2</tms:TipoDaParcela>
+                        <tms:DescricaoParcela>ADIANTAMENTO</tms:DescricaoParcela>
+                        <tms:Valor>4220.0</tms:Valor>
+                        <tms:NumeroParcela>78549</tms:NumeroParcela>
+                        <tms:DataVencimento>2021-03-08</tms:DataVencimento>
+                        <tms:TipoDaParcela>1</tms:TipoDaParcela>
                         <tms:FormaPagamento>2</tms:FormaPagamento>
                         <tms:CartaoPagamento></tms:CartaoPagamento>
-                        <tms:CodigoBanco>341</tms:CodigoBanco>
-                        <tms:AgenciaDeposito>0734</tms:AgenciaDeposito>
-                        <tms:ContaDeposito>58077-2</tms:ContaDeposito>
+                        <tms:CodigoBanco>748</tms:CodigoBanco>
+                        <tms:AgenciaDeposito>0715</tms:AgenciaDeposito>
+                        <tms:ContaDeposito>85855-2</tms:ContaDeposito>
                         <tms:DigitoContaDeposito>0</tms:DigitoContaDeposito>
                         <tms:ProcessarAutomaticamente>true</tms:ProcessarAutomaticamente>
                         <tms:IdOperacaoTransporteParcela>0</tms:IdOperacaoTransporteParcela>
@@ -78,31 +78,31 @@
                 </tms:Parcelas>
                 <tms:Veiculos>
                     <tms:OperacaoTransporteVeiculoRequest>
-                        <tms:Placa>AXS5518</tms:Placa>
-                        <tms:RNTRC>00330260</tms:RNTRC>
+                        <tms:Placa>AUQ7267</tms:Placa>
+                        <tms:RNTRC>01751814</tms:RNTRC>
                     </tms:OperacaoTransporteVeiculoRequest>
                     <tms:OperacaoTransporteVeiculoRequest>
-                        <tms:Placa>FFW4204</tms:Placa>
-                        <tms:RNTRC>00330260</tms:RNTRC>
+                        <tms:Placa>AZO8951</tms:Placa>
+                        <tms:RNTRC>01751814</tms:RNTRC>
                     </tms:OperacaoTransporteVeiculoRequest>
                 </tms:Veiculos>
-                <tms:IdRotaModelo>14512</tms:IdRotaModelo>
-                <tms:DeduzirImpostos>true</tms:DeduzirImpostos>
+                <tms:IdRotaModelo>217399</tms:IdRotaModelo>
+                <tms:DeduzirImpostos>false</tms:DeduzirImpostos>
                 <tms:TarifasBancarias>0.0</tms:TarifasBancarias>
                 <tms:QuantidadeTarifasBancarias>8</tms:QuantidadeTarifasBancarias>
-                <tms:IdIntegrador>OC.: 19980 - EMP.: 1 - AFT.: 1 -1541565144</tms:IdIntegrador>
-                <tms:ValorDescontoAntecipado>119.0</tms:ValorDescontoAntecipado>
-                <tms:CPFCNPJParticipanteDestinatario>23272263000589</tms:CPFCNPJParticipanteDestinatario>
+                <tms:IdIntegrador>OC.: 29552 - EMP.: 1 - AFT.: 1 987604079</tms:IdIntegrador>
+                <tms:ValorDescontoAntecipado>76.32</tms:ValorDescontoAntecipado>
+                <tms:CPFCNPJParticipanteDestinatario>01838723042202</tms:CPFCNPJParticipanteDestinatario>
                 <tms:CPFCNPJParticipanteContratante></tms:CPFCNPJParticipanteContratante>
                 <tms:CPFCNPJParticipanteSubcontratante></tms:CPFCNPJParticipanteSubcontratante>
                 <tms:CPFCNPJParticipanteConsignatario></tms:CPFCNPJParticipanteConsignatario>
                 <tms:NumeroLacreTransporteCombustivel></tms:NumeroLacreTransporteCombustivel>
                 <tms:NumeroCartaoValePedagio>0</tms:NumeroCartaoValePedagio>
                 <tms:DocumentoValePedagio></tms:DocumentoValePedagio>
-                <tms:CEPOrigem>75132040</tms:CEPOrigem>
-                <tms:CEPDestino>37900000</tms:CEPDestino>
+                <tms:CEPOrigem>75570000</tms:CEPOrigem>
+                <tms:CEPDestino>85900000</tms:CEPDestino>
                 <tms:TipoCargaANTT>1</tms:TipoCargaANTT>
-                <tms:DistanciaPercorrida>723.0</tms:DistanciaPercorrida>
+                <tms:DistanciaPercorrida>1142.0</tms:DistanciaPercorrida>
             </tms:operacao>
         </tms:CadastrarAtualizarOperacaoTransporte>
     </soapenv:Body>

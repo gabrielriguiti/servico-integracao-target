@@ -1,17 +1,16 @@
 package br.com.sankhyamt.integracaotarget.service;
 
 import br.com.sankhyamt.integracaotarget.exception.DatabaseException;
-import br.com.sankhyamt.integracaotarget.exception.IntegracaoException;
 import br.com.sankhyamt.integracaotarget.model.database.ConnectionSQLServer;
 import br.com.sankhyamt.integracaotarget.model.entity.Transportador;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
 import br.com.sankhyamt.integracaotarget.util.LogSankhya;
+import br.com.sankhyamt.integracaotarget.util.RequestFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import sun.rmi.runtime.Log;
 
 import javax.xml.soap.*;
 import java.io.ByteArrayInputStream;
@@ -26,6 +25,7 @@ import java.sql.SQLException;
  *
  * @author Gabriel Riguiti
  * @since v1.0
+ * @version 1.1
  */
 public class TransportadorService {
 
@@ -41,7 +41,7 @@ public class TransportadorService {
 
         Integer idTranportador = 0;
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
         String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
                 "   <soapenv:Header/>\n" +
@@ -56,8 +56,8 @@ public class TransportadorService {
                 "            <tms:Instrucao>1</tms:Instrucao>\n" +
                 "            <tms:RNTRC>" + transportador.getRNTRC() + "</tms:RNTRC>\n" +
                 "            <tms:CPFCNPJ>" + transportador.getCPFCNPJ() + "</tms:CPFCNPJ>\n" +
-                "            <tms:Nome>" + transportador.getNome().substring(0,transportador.getNome().indexOf(" ")).trim() + "</tms:Nome>\n" +
-                "            <tms:Sobrenome>" + transportador.getNome().substring(transportador.getNome().indexOf(" "),20).trim() + "</tms:Sobrenome>\n" +
+                "            <tms:Nome>" + transportador.getNome().trim() + "</tms:Nome>\n" +
+                "            <tms:Sobrenome>" + (transportador.getNome().substring(transportador.getNome().indexOf(" "))).trim() + "</tms:Sobrenome>\n" +
                 "            <tms:RazaoSocial>" + transportador.getRazaoSocial() + "</tms:RazaoSocial>\n" +
                 "            <tms:DataNascimento>" + transportador.getDataNascimento() + "</tms:DataNascimento>\n" +
                 "            <tms:RG>" + transportador.getRG() + "</tms:RG>\n" +
@@ -80,8 +80,8 @@ public class TransportadorService {
                 "            <tms:CEP>" + transportador.getCEP() + "</tms:CEP>\n" +
                 "            <tms:CodigoIBGEMunicipio>" + transportador.getCodIbgeMunicipio() + "</tms:CodigoIBGEMunicipio>\n" +
                 "            <tms:IdentificadorEndereco>" + transportador.getCEP() + "</tms:IdentificadorEndereco>\n" +
-                "            <tms:TelefoneFixo>" + transportador.getTelefoneFixo() + "</tms:TelefoneFixo>\n" +
-                "            <tms:TelefoneCelular>" + transportador.getTelefoneCelular() + "</tms:TelefoneCelular>\n" +
+                "            <tms:TelefoneFixo>" + (!transportador.getTelefoneFixo().trim().equals("") ? transportador.getTelefoneFixo() : "0") + "</tms:TelefoneFixo>\n" +
+                "            <tms:TelefoneCelular>" + (!transportador.getTelefoneCelular().trim().equals("") ? transportador.getTelefoneCelular() : "0") + "</tms:TelefoneCelular>\n" +
                 "            <tms:EstadoCivil>" + transportador.getEstadoCivil() + "</tms:EstadoCivil>\n" +
                 "            <tms:Email>" + transportador.getEmail() + "</tms:Email>\n" +
                 "            <tms:Usuario>" + transportador.getUsuario() + "</tms:Usuario>\n" +
@@ -121,7 +121,7 @@ public class TransportadorService {
             MessageFactory messageFactory = MessageFactory.newInstance();
 
             SOAPMessage soapMessage = messageFactory.createMessage(headers,
-                    (new ByteArrayInputStream(request.getBytes())));
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request).getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -203,8 +203,8 @@ public class TransportadorService {
                 dadosTransportador.setNumeroEndereco(rs.getInt("NUMEND"));
                 dadosTransportador.setCEP(rs.getString("CEP").trim());
                 dadosTransportador.setIndentificadorEndereco(rs.getString("COMPLEMENTO").trim());
-                dadosTransportador.setTelefoneFixo(rs.getString("TELEFONE").replace(" ","").trim());
-                dadosTransportador.setTelefoneCelular(rs.getString("TIMTELEFONE01").replace(" ","").trim());
+                dadosTransportador.setTelefoneFixo(rs.getString("TELEFONE").replace(" ", "").trim());
+                dadosTransportador.setTelefoneCelular(rs.getString("TIMTELEFONE01").replace(" ", "").trim());
                 dadosTransportador.setEstadoCivil(rs.getString("TIMESTADOCIVIL").trim());
                 dadosTransportador.setEmail(rs.getString("EMAIL").trim());
                 dadosTransportador.setUsuario(rs.getString("USUARIO").trim());
@@ -241,3 +241,6 @@ public class TransportadorService {
     }
 
 }
+
+
+// v1.1 - Implementação da formatação do request, para retirar caracteres especiais

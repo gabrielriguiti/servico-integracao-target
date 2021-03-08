@@ -19,7 +19,7 @@ public class ConnectionSQLServer {
 
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
 
-        String connectionUrl = "jdbc:sqlserver://10.40.3.241:1433;databaseName=SETRANSPORTES_TST;" +
+        String connectionUrl = "jdbc:sqlserver://10.40.3.241:1433;databaseName=SETRANSPORTES_PRD;" +
                 "user=SANKHYA;password=2oie7tn6";
 
         try {

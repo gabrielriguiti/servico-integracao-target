@@ -7,6 +7,7 @@ import br.com.sankhyamt.integracaotarget.model.entity.Participante;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
 import br.com.sankhyamt.integracaotarget.util.LogSankhya;
+import br.com.sankhyamt.integracaotarget.util.RequestFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,6 +21,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @since v1.2
+ * @version 1.1
+ */
 public class ParticipanteService {
 
     Participante dadosParticipante = new Participante();
@@ -83,7 +88,7 @@ public class ParticipanteService {
      */
     public Integer cadastrarAtualizarParticipante(Participante participante) throws SQLException {
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc";
 
         Element element = null;
 
@@ -132,8 +137,8 @@ public class ParticipanteService {
 
             MessageFactory messageFactory = MessageFactory.newInstance();
 
-            SOAPMessage soapMessage = messageFactory.createMessage(headers,(
-                    new ByteArrayInputStream(request.getBytes())));
+            SOAPMessage soapMessage = messageFactory.createMessage(headers,
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request).getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -173,3 +178,6 @@ public class ParticipanteService {
         return 0;
     }
 }
+
+
+// v1.1 - Implementação da formatação do request, para retirar caracteres especiais

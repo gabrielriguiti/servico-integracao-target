@@ -8,6 +8,7 @@ import br.com.sankhyamt.integracaotarget.model.entity.Transportador;
 import br.com.sankhyamt.integracaotarget.properties.AuthProperties;
 import br.com.sankhyamt.integracaotarget.util.LogFile;
 import br.com.sankhyamt.integracaotarget.util.LogSankhya;
+import br.com.sankhyamt.integracaotarget.util.RequestFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,6 +22,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @since v1.0
+ * @version 1.2
+ */
 public class MotoristaService {
 
     static AuthProperties authProperties = new AuthProperties();
@@ -102,7 +107,7 @@ public class MotoristaService {
 
         Integer idMotorista = 0;
 
-        final String url = "https://dev.transportesbra.com.br/frete/TMS/FreteService.svc";
+        final String url = "https://www.transportesbra.com.br/frete/TMS/FreteService.svc?singleWsdl";
 
         String request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tms=\"http://tmsfrete.v2.targetmp.com.br\">\n" +
                 "   <soapenv:Header/>\n" +
@@ -133,7 +138,8 @@ public class MotoristaService {
                 "            <tms:Nacionalidade>" + motorista.getNacionalidade() + "</tms:Nacionalidade>\n" +
                 "            <tms:Endereco>" + motorista.getEndereco() + "</tms:Endereco>\n" +
                 "            <tms:NumeroEndereco>" + motorista.getNumero() + "</tms:NumeroEndereco>\n" +
-                "            <tms:EnderecoComplemento>" + motorista.enderecoCompleto().substring(0,30) + "</tms:EnderecoComplemento>\n" +
+                "            <tms:EnderecoComplemento>" + (motorista.enderecoCompleto().length()
+                >= 30 ? motorista.enderecoCompleto().substring(0, 30) : motorista.enderecoCompleto()) + "</tms:EnderecoComplemento>\n" +
                 "            <tms:CEP>" + motorista.getCep() + "</tms:CEP>\n" +
                 "            <tms:Bairro>" + motorista.getBairro() + "</tms:Bairro>\n" +
                 "            <tms:CodigoIBGEMunicipio>" + motorista.getCodigoIBGEMunicipio() + "</tms:CodigoIBGEMunicipio>\n" +
@@ -165,7 +171,7 @@ public class MotoristaService {
             MessageFactory messageFactory = MessageFactory.newInstance();
 
             SOAPMessage soapMessage = messageFactory.createMessage(headers,
-                    (new ByteArrayInputStream(request.getBytes())));
+                    (new ByteArrayInputStream(RequestFormat.requestFormat(request).getBytes())));
 
             SOAPMessage response = soapConnection.call(soapMessage, url);
 
@@ -178,7 +184,7 @@ public class MotoristaService {
             Element element = (Element) node;
 
             if (!element.getElementsByTagName("IdMotorista")
-                    .item(0).getTextContent().equals("0")){
+                    .item(0).getTextContent().equals("0")) {
                 idMotorista = Integer.valueOf(element.getElementsByTagName("IdMotorista")
                         .item(0).getTextContent());
 
@@ -210,11 +216,16 @@ public class MotoristaService {
                         request
                 );
 
+                LogFile.logger.info("Erro na integração\n\n" + element.getElementsByTagName("Erro")
+                        .item(0).getTextContent());
+
                 throw new IntegracaoException("Erro na integração\n\n" + element.getElementsByTagName("Erro")
                         .item(0).getTextContent());
             }
 
-        } catch (SOAPException | IOException | SQLException e) {
+        } catch (SOAPException | IOException | SQLException /*| TransformerConfigurationException*/ e) {
+
+            LogFile.logger.info("Erro na integração\n\n" + e.getMessage());
 
             throw new IntegracaoException("Erro na integração\n\n" + e.getMessage());
         }
@@ -222,3 +233,5 @@ public class MotoristaService {
         return 0;
     }
 }
+
+// v1.2 - Implementação da formatação do request, para retirar caracteres especiais

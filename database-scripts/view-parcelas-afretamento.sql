@@ -1,11 +1,11 @@
-ALTER
+CREATE
 VIEW VWPARCELASAFT AS
 SELECT ISNULL(TCB.DESCRICAO, '')                       AS DESCRICAO,
        ISNULL(SUM(ITE.VALOR), 0)                       AS VALOR,
        FORMAT(ISNULL(ORD.DHPREVCGD, ''), 'yyyy-MM-dd') AS DTVENC,
        CASE
            WHEN ITE.CODTIPCOB = 2 THEN 1
-           WHEN ITE.CODTIPCOB = 3 THEN 2
+           WHEN ITE.CODTIPCOB = 3 THEN 3
            ELSE 4 END                                  AS TIPPARCELA,
        CASE
            WHEN AFT.FORMAPGTOADIANT = 'D' THEN 2

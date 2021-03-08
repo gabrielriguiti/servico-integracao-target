@@ -1,5 +1,4 @@
-ALTER
-VIEW WVDADOSOPTRANS AS
+CREATE VIEW WVDADOSOPTRANS AS
 SELECT CASE
            WHEN CAB.CODPARC <> CAB.CODPARCREMETENTE
                THEN 2
@@ -51,9 +50,10 @@ SELECT CASE
        ISNULL(ORD.AD_TIPCARGAANTT, 0)                                                                AS TIPCARGAANTT,
        ISNULL(AFT.VLRTAXASEGURO, 0)                                                                  AS VLRTAXASEGURO,
        ROT.DISTANCIA                                                                                 AS DISTANCIA,
-       ORD.ORDEMCARGA,
-       ORD.CODEMP,
-       AFT.CODAFT
+       ORD.ORDEMCARGA                                                                                AS ORDEMCARGA,
+       ORD.CODEMP                                                                                    AS CODEMP,
+       AFT.CODAFT                                                                                    AS CODAFT,
+       ISNULL(ROT.CODROTATARGET, 0)                                                                  AS IDROTA
 FROM TGFCAB CAB
          INNER JOIN TGFORD ORD ON ORD.ORDEMCARGA = CAB.ORDEMCARGA AND ORD.CODEMP = CAB.CODEMP
          INNER JOIN VMSCTE CTE

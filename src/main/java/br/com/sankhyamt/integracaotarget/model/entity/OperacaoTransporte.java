@@ -33,7 +33,7 @@ public class OperacaoTransporte {
     private String CPFMotorista = "";
     private String RNTRCMotorista = "";
     private String itemFinanceiro = "";
-    private Integer idRotaModelo = 14512;
+    private Integer idRotaModelo = 0;
     private Boolean deduzirImpostos = false;
     private Double tarifasBancarias = 0.0;
     private Integer quantidadeTarifasBancarias = 8;
